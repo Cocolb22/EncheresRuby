@@ -1,0 +1,49 @@
+<%= render "shared/navbar" %>
+
+<div class="mx-auto mt-3" style="width: 300px;">
+  <h2><%= t("devise.registrations.sign_up") %></h2>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    
+    <div class="form-inputs">
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" },
+                  label: t("devise.connexion.email") %> 
+      <%= f.input :password,
+                  required: true,
+                  hint: ("#{@minimum_password_length}" + " " + t("devise.connexion.min_characters") if @minimum_password_length),
+                  input_html: { autocomplete: "new-password" },
+                  label: t("devise.connexion.password") %>
+      <%= f.input :password_confirmation,
+                  required: true,
+                  input_html: { autocomplete: "new-password" },
+                  label: t("devise.connexion.password_confirmation") %>
+      <%=f.input :first_name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "first_name" }, 
+                  label: t("activerecord.wording.first_name")%>
+      <%=f.input :last_name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "last_name" }, 
+                  label: t("activerecord.wording.last_name")%>
+      <%=f.input :pseudo,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "pseudo" }, 
+                  label: t("activerecord.wording.pseudo")%>
+    </div>
+
+    <div class="form-actions mx-auto rounded-btn" >
+      <%= f.button :submit, "Sign up" %>
+    </div>
+  <% end %>
+  <div class="mx-auto">
+    <%= render "devise/shared/links" %>
+  </div>
+
+</div>
+
