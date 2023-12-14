@@ -1,0 +1,28 @@
+<%= render "shared/navbar" %>
+
+<div class="mx-auto mt-3" style="width: 300px;">
+  <h2><%= t("devise.sessions.sign_in") %></h2>
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="form-inputs">
+      <%= f.input :email,
+                  required: false,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" },
+                  label: t("devise.connexion.email") %>
+      <%= f.input :password,
+                  required: false,
+                  input_html: { autocomplete: "current-password" },
+                  label: t("devise.connexion.password") %>
+
+      <div class="d-flex justify-content-center">
+        <%= f.input :remember_me, as: :boolean, label: t("devise.sessions.remember_me") if devise_mapping.rememberable? %>
+      </div>
+    </div>
+
+     <div class="form-actions mx-auto rounded-btn" >
+      <%= f.button :submit, t("devise.sessions.sign_in") %>
+    </div>
+  <% end %>
+</div>
+
+<%= render "devise/shared/links" %>

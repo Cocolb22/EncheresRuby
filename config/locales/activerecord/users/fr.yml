@@ -1,0 +1,20 @@
+fr:
+  activerecord:
+    wording:
+      first_name: "Prénom"
+      last_name: "Nom de famille"
+      pseudo: "Pseudo"
+    errors:
+      models:
+        user:
+          attributes:
+            first_name:
+              blank: "Le prénom ne peut pas être vide"
+            last_name:
+              blank: "Le nom de famille ne peut pas être vide"
+            pseudo:
+              blank: "Le pseudo ne peut pas être vide"
+            email:
+              blank: "L'email ne peut pas être vide"
+            password:
+              blank: "Le mot de passe ne peut pas être vide"
