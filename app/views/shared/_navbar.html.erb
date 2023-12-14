@@ -6,25 +6,30 @@
 
   <div>
     <ul class="navbar-nav">
-      <li class="nav-item">
-        <%= link_to "English", url_for(locale: 'en'), class: 'nav-link' %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Français", url_for(locale: 'fr'), class: 'nav-link' %>
-      </li>
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <p class="nav-link"> Hello <%= current_user.first_name %></p>
+        </li>
+      <% end %>
+      <% if I18n.locale == :fr %>
+        <li class="nav-item">
+          <%= link_to "En", url_for(locale: 'en'), class: 'nav-link' %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Fr", url_for(locale: 'fr'), class: 'nav-link' %>
+        </li>
+      <% end %>
     </ul>
+
   </div>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
   <div class="ms-auto">
-    <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
           <li class="nav-item">
-            <%= link_to 'Déconnexion', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+            <%= button_to "Déconnexion", destroy_user_session_path, method: :delete, class:"nav-link" %>
           </li>
         <% else %>
           <li class="nav-item">
@@ -35,7 +40,6 @@
           </li>
         <% end %>
       </ul>
-    </div>
   </div>
 </nav>
 
