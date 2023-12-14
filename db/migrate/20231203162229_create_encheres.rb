@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateEncheres < ActiveRecord::Migration[7.0]
   def change
     create_table :encheres do |t|
