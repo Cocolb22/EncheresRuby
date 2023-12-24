@@ -3,5 +3,25 @@
   <%= render "shared/navbar" %>
 </nav>
 <body>
-  
+  <div class="container">
+    <h1> <%= t("globals.home_page.title") %></h1>
+    <div class="row">
+      <% @articles.each do |article| %>
+          <div class="card mb-3 m-2" style="max-width: 400px;">
+            <div class="row g-0">
+              <div class="col-md-6">
+                <%= image_tag "marteau.jpeg", style:"max-width: 200px"%>
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                <h5 class="card-title"><%= t("globals.home_page.poke_name")%> : <%= article.name.capitalize   %></h5>
+                  <p class="card-text"><%= t("globals.home_page.poke_description")%> : <%= article.description.capitalize   %></h5>
+                  <p class="card-text"><%= t("globals.home_page.poke_price")%> : <%=article.first_price  %></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
 </body>
