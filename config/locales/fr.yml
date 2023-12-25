@@ -1,0 +1,8 @@
+fr:
+  globals:
+     home_page:
+      title: "PokéEnchères"
+      poke_name: "Nom"
+      poke_description: "Description"
+      poke_price: "Prix de départ"
+      create_article: Créer un article

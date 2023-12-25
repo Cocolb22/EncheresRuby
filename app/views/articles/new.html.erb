@@ -1,0 +1,15 @@
+<nav>
+  <%= render "shared/navbar" %>
+</nav>
+
+<%= simple_form_for @article do |f| %>
+  <%= f.input :name %>
+  <%= f.input :description %>
+  <%= f.input :first_price %>
+  <%= f.input :category, label: "Catégorie", collection: Article::CATEGORIES %>
+  <%= f.input :start_date, as: :string, order: [:day, :month, :year] %>
+  <%= f.input :end_date, as: :string, order: [:day, :month, :year] %>
+
+
+  <%= f.button :submit %>
+<% end %>

@@ -13,47 +13,30 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 20_231_203_162_229) do
-  create_table 'article_vendus', force: :cascade do |t|
-    t.string 'nomArticle'
+  create_table 'articles', force: :cascade do |t|
+    t.string 'name'
     t.text 'description'
-    t.date 'dateDebutEncheres'
-    t.date 'dateFinEncheres'
-    t.integer 'prixInitial'
-    t.integer 'prixVente'
+    t.date 'start_date'
+    t.date 'end_date'
+    t.integer 'first_price'
+    t.integer 'end_price'
+    t.string 'image'
+    t.string 'category'
     t.integer 'user_id'
-    t.integer 'categorie_id'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['categorie_id'], name: 'index_article_vendus_on_categorie_id'
-    t.index ['user_id'], name: 'index_article_vendus_on_user_id'
+    t.index ['user_id'], name: 'index_articles_on_user_id'
   end
 
-  create_table 'categories', force: :cascade do |t|
-    t.integer 'noCategorie'
-    t.string 'libelle'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-  end
-
-  create_table 'encheres', force: :cascade do |t|
+  create_table 'bids', force: :cascade do |t|
     t.integer 'user_id'
-    t.integer 'article_vendu_id'
-    t.datetime 'dateEnchere'
-    t.integer 'montantEnchere'
+    t.integer 'article_id'
+    t.datetime 'bid_date'
+    t.integer 'bid_price'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['article_vendu_id'], name: 'index_encheres_on_article_vendu_id'
-    t.index ['user_id'], name: 'index_encheres_on_user_id'
-  end
-
-  create_table 'retraits', force: :cascade do |t|
-    t.integer 'article_vendu_id'
-    t.string 'rue'
-    t.string 'codePostal'
-    t.string 'ville'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['article_vendu_id'], name: 'index_retraits_on_article_vendu_id'
+    t.index ['article_id'], name: 'index_bids_on_article_id'
+    t.index ['user_id'], name: 'index_bids_on_user_id'
   end
 
   create_table 'users', force: :cascade do |t|
@@ -77,9 +60,18 @@ ActiveRecord::Schema[7.0].define(version: 20_231_203_162_229) do
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
-  add_foreign_key 'article_vendus', 'categories', column: 'categorie_id'
-  add_foreign_key 'article_vendus', 'users'
-  add_foreign_key 'encheres', 'article_vendus'
-  add_foreign_key 'encheres', 'users'
-  add_foreign_key 'retraits', 'article_vendus'
+  create_table 'withdraws', force: :cascade do |t|
+    t.integer 'article_id'
+    t.string 'street'
+    t.string 'zip_code'
+    t.string 'city'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['article_id'], name: 'index_withdraws_on_article_id'
+  end
+
+  add_foreign_key 'articles', 'users'
+  add_foreign_key 'bids', 'articles'
+  add_foreign_key 'bids', 'users'
+  add_foreign_key 'withdraws', 'articles'
 end

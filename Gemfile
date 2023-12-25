@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.1'
+ruby '3.2.2'
 
 # Bundle edrubyrubge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8'
@@ -43,6 +43,9 @@ gem 'simple_form'
 
 # Autoprefixer
 gem 'autoprefixer-rails'
+
+# rubocop
+gem 'rubocop', '~> 1.59'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

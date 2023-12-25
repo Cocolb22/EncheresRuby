@@ -7,6 +7,7 @@ fr:
       login: "Se connecter"
       sign_up: "S'inscrire"
       min_characters: "caractères minimum"
+      log_out: "Déconnexion"
     confirmations:
       confirmed: "Votre adresse e-mail a été confirmée avec succès."
       send_instructions: "Vous recevrez un e-mail avec des instructions pour confirmer votre adresse e-mail dans quelques minutes."
@@ -70,4 +71,3 @@ fr:
       not_saved:
         one: "1 erreur a empêché ce %{resource} d'être enregistré :"
         other: "%{count} erreurs ont empêché ce %{resource} d'être enregistré :"
-   
