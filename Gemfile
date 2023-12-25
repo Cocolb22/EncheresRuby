@@ -44,6 +44,9 @@ gem 'simple_form'
 # Autoprefixer
 gem 'autoprefixer-rails'
 
+# rubocop
+gem 'rubocop', '~> 1.59'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

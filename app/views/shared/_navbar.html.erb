@@ -26,8 +26,11 @@
 
 
   <div class="ms-auto">
-      <ul class="navbar-nav ml-auto">
+      <ul class="navbar-nav m-auto">
         <% if user_signed_in? %>
+          <li class="nav-item">
+            <%= link_to t("globals.home_page.create_article"), new_article_path, class:"nav-link" %>
+          </li>
           <li class="nav-item">
             <%= link_to t("devise.connexion.log_out"), destroy_user_session_path, method: :delete, class:"nav-link" %>
           </li>

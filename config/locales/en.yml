@@ -5,3 +5,4 @@ en:
       poke_name: "Name"
       poke_description: "Description"
       poke_price: "First Price"
+      create_article: "Create Article"

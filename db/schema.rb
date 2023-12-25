@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,75 +12,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_03_162229) do
-  create_table "articles", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.date "start_date"
-    t.date "end_date"
-    t.integer "first_price"
-    t.integer "end_price"
-    t.string "image"
-    t.integer "user_id"
-    t.integer "categorie_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["categorie_id"], name: "index_articles_on_categorie_id"
-    t.index ["user_id"], name: "index_articles_on_user_id"
+ActiveRecord::Schema[7.0].define(version: 20_231_203_162_229) do
+  create_table 'articles', force: :cascade do |t|
+    t.string 'name'
+    t.text 'description'
+    t.date 'start_date'
+    t.date 'end_date'
+    t.integer 'first_price'
+    t.integer 'end_price'
+    t.string 'image'
+    t.string 'category'
+    t.integer 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_articles_on_user_id'
   end
 
-  create_table "bids", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "article_id"
-    t.datetime "bid_date"
-    t.integer "bid_price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["article_id"], name: "index_bids_on_article_id"
-    t.index ["user_id"], name: "index_bids_on_user_id"
+  create_table 'bids', force: :cascade do |t|
+    t.integer 'user_id'
+    t.integer 'article_id'
+    t.datetime 'bid_date'
+    t.integer 'bid_price'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['article_id'], name: 'index_bids_on_article_id'
+    t.index ['user_id'], name: 'index_bids_on_user_id'
   end
 
-  create_table "categories", force: :cascade do |t|
-    t.integer "noCategorie"
-    t.string "libelle"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'users', force: :cascade do |t|
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'first_name'
+    t.string 'last_name'
+    t.string 'pseudo'
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.string 'phone'
+    t.string 'street'
+    t.string 'zip_code'
+    t.string 'city'
+    t.integer 'credit'
+    t.boolean 'administrateur'
+    t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "pseudo"
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "phone"
-    t.string "street"
-    t.string "zip_code"
-    t.string "city"
-    t.integer "credit"
-    t.boolean "administrateur"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  create_table 'withdraws', force: :cascade do |t|
+    t.integer 'article_id'
+    t.string 'street'
+    t.string 'zip_code'
+    t.string 'city'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['article_id'], name: 'index_withdraws_on_article_id'
   end
 
-  create_table "withdraws", force: :cascade do |t|
-    t.integer "article_id"
-    t.string "street"
-    t.string "zip_code"
-    t.string "city"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["article_id"], name: "index_withdraws_on_article_id"
-  end
-
-  add_foreign_key "articles", "categories", column: "categorie_id"
-  add_foreign_key "articles", "users"
-  add_foreign_key "bids", "articles"
-  add_foreign_key "bids", "users"
-  add_foreign_key "withdraws", "articles"
+  add_foreign_key 'articles', 'users'
+  add_foreign_key 'bids', 'articles'
+  add_foreign_key 'bids', 'users'
+  add_foreign_key 'withdraws', 'articles'
 end

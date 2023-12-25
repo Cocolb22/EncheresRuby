@@ -10,8 +10,8 @@ class CreateArticles < ActiveRecord::Migration[7.0]
       t.integer :first_price
       t.integer :end_price
       t.string :image
+      t.string :category
       t.references :user, foreign_key: true
-      t.references :categorie, foreign_key: true
       t.timestamps
     end
   end
