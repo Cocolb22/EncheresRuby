@@ -1,0 +1,17 @@
+<body>
+  <div class="container col-md-4 mt-4 shadow-box border pb-3 rounded">
+    <%= simple_form_for @article do |f| %>
+      <%= f.input :name %>
+      <%= f.input :description %>
+      <%= f.input :first_price %>
+      <%= f.input :category, label: "Catégorie", collection: Article::CATEGORIES %>
+      <%= f.input :start_date, as: :string, order: [:day, :month, :year] %>
+      <%= f.input :end_date, as: :string, order: [:day, :month, :year] %>
+
+      <div class="d-flex justify-content-center btn btn-primary rounded">
+        <%= f.button :submit %>
+      </div>
+    <% end %>
+  </div>
+
+</body>
