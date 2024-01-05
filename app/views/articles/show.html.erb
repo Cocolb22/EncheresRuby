@@ -1,0 +1,36 @@
+<div>
+
+  <nav>
+    <%= render "shared/navbar" %>
+  </nav>
+
+  <body>
+    <div class="container col-md-4 mt-4 pb-3 d-flex justify-content-center">
+      <ul>
+        <li><%=@article.name %></li>
+        <li><%=@article.description %></li>
+        <li><%=@article.first_price %></li>
+        <li><%= @article.start_date %></li>
+      </ul>
+    </div>
+    <div class="container col-md-4 mt-4 pb-3">
+      <ul class="d-flex justify-content-center">
+        <% if current_user.id ==  @article_user.id && @article.start_date > Date.today%>
+          <li class="nav-item m-2">
+           <%= form_with(model: @article, method: :delete, url: article_path(@article), data: { turbo_confirm: "Are you sure?" }) do |form| %>
+            <%= form.button t("globals.show_page.delete"), type: :submit%>
+            <% end %>
+
+          </li>
+          <li class="nav-item m-2">
+            <%= link_to t("globals.show_page.modify"), edit_article_path(@article) %>
+        <% end %>
+        </li>
+      </ul>
+    </div>
+
+  </body>
+
+
+
+</div>
