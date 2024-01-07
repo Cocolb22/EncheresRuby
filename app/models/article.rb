@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
   belongs_to :user
-  has_many :bids
+  has_many :bids, dependent: :destroy
   has_one_attached :image
 
   validates :name, :description, :first_price, :start_date, :end_date, presence: true
@@ -13,14 +13,22 @@ class Article < ApplicationRecord
 
   CATEGORIES = ["Pokémon combat", "Pokémon eau", "Pokémon feu", "Pokémon plante", "Pokémon électrique", "Pokémon vol", "Pokémon poison", "Pokémon sol", "Pokémon roche", "Pokémon insecte", "Pokémon spectre", "Pokémon ténèbres", "Pokémon psy", "Pokémon acier", "Pokémon glace", "Pokémon dragon", "Pokémon fée"]
 
+  def get_highest_bid
+    if bids.count.zero?
+      first_price
+    else
+      bids.maximum(:bid_price)
+    end
+  end
+
   def date_debut_cannot_be_in_the_past
-    if start_date.present? && start_date < Date.today
+    if start_date.present? && start_date <  DateTime.now
       errors.add(:start_date, "ne peut pas être dans le passé")
     end
   end
 
   def date_fin_cannot_be_in_the_past
-    if end_date.present? && end_date < Date.today
+    if end_date.present? && end_date <  DateTime.now
       errors.add(:end_date, "ne peut pas être dans le passé")
     end
   end

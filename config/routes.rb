@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   # Internationalization
   get '/change_locale/:locale', to: 'application#change_locale', as: :change_locale
 
-  resources :articles
+  resources :articles do
+    resources :bids, only: [:create]
+  end
 end

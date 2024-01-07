@@ -12,20 +12,20 @@ User.create!(id: 1, email: 'coco@test.com', password: 'password', first_name: 'C
 
 User.create!(id: 2, email: 'erle@test.com', password: 'password1', first_name: 'Erle', last_name: 'LB', pseudo: 'Erle')
 
-Article.create!(name: 'Pikachu', description: 'une souris jaune', start_date: Date.today+3, end_date: Date.today + 6,
+Article.create!(name: 'Pikachu', description: 'une souris jaune', start_date:  DateTime.now + 3, end_date:  DateTime.now + 6,
                 user_id: 1, first_price: 100)
 
-Article.create!(name: 'Dracaufeu', description: "l'ultime pokémon feu", start_date: Date.today, end_date: Date.today + 1,
+Article.create!(name: 'Dracaufeu', description: "l'ultime pokémon feu", start_date:  DateTime.now + 1 , end_date:  DateTime.now + 2,
                 user_id: 1, first_price: 100)
 
-Article.create!(name: 'Carapuce', description: 'une tortue bleue', start_date: Date.today, end_date: Date.today + 1,
+Article.create!(name: 'Carapuce', description: 'une tortue bleue', start_date:  DateTime.now + 1 , end_date:  DateTime.now + 5,
                 user_id: 2, first_price: 100)
 
-Article.create!(name: 'Bulbizarre', description: 'une plante verte', start_date: Date.today, end_date: Date.today + 1,
+Article.create!(name: 'Bulbizarre', description: 'une plante verte', start_date:  DateTime.now + 1, end_date:  DateTime.now + 4,
                 user_id: 2, first_price: 100)
 
-Article.create!(name: 'Salamèche', description: 'un lézard rouge', start_date: Date.today, end_date: Date.today + 1,
+Article.create!(name: 'Salamèche', description: 'un lézard rouge', start_date:  DateTime.now + 1, end_date:  DateTime.now + 8,
                 user_id: 2, first_price: 100)
 
-Article.create!(name: 'Rattata', description: 'un rat violet', start_date: Date.today, end_date: Date.today + 1,
+Article.create!(name: 'Rattata', description: 'un rat violet', start_date:  DateTime.now + 1, end_date:  DateTime.now + 6,
                 user_id: 1, first_price: 100)

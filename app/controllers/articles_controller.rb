@@ -19,7 +19,9 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @user = current_user
     @article_user = User.find(@article.user_id)
-
+    @bids = @article.bids.order(bid_price: :desc)
+    @highest_bid = @article.get_highest_bid
+    @bid = Bid.new
   end
 
   def edit
