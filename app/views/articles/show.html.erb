@@ -5,17 +5,29 @@
   </nav>
 
   <body>
-    <div class="container col-md-4 mt-4 pb-3 d-flex justify-content-center">
-      <ul>
-        <li><%=@article.name %></li>
-        <li><%=@article.description %></li>
-        <li><%=@article.first_price %></li>
-        <li><%= @article.start_date %></li>
-      </ul>
+    <div class="container col-md-4 mt-4 pb-3 d-flex-column justify-content-center">
+        <p><%=@article.name %></p>
+        <p><%=@article.description %></p>
+        <p><%=@article.first_price %></p>
+        <p><%= @article.start_date.strftime('%Y-%m-%d %H:%M:%S') %></p>
+        <p><%= @article.end_date.strftime('%Y-%m-%d %H:%M:%S') %></p>
+        
+        <p><%=@highest_bid %></p>
+
+        <% if @article.start_date > DateTime.now && @article.end_date < DateTime.now %>
+          <%= simple_form_for [@article, @bid] do |f| %>
+            <%= f.input :bid_price %>
+            <%= f.button :submit %>
+          <% end %>
+        <% end %>
     </div>
+
+
+
+
     <div class="container col-md-4 mt-4 pb-3">
       <ul class="d-flex justify-content-center">
-        <% if current_user.id ==  @article_user.id && @article.start_date > Date.today%>
+        <% if current_user.id == @article_user&.id && @article.start_date > DateTime.now && @article.end_date >= DateTime.now %>
           <li class="nav-item m-2">
            <%= form_with(model: @article, method: :delete, url: article_path(@article), data: { turbo_confirm: "Are you sure?" }) do |form| %>
             <%= form.button t("globals.show_page.delete"), type: :submit%>
@@ -29,7 +41,16 @@
       </ul>
     </div>
 
+    <div>
+      <% @article.bids.each do |bid| %>
+        <p>
+          <%= "Bid by #{bid.user.first_name}: #{bid.bid_price}" %>
+        </p>
+      <% end %>
+    </div>
+
   </body>
+
 
 
 

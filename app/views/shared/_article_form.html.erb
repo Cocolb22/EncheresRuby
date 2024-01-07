@@ -5,8 +5,8 @@
       <%= f.input :description %>
       <%= f.input :first_price %>
       <%= f.input :category, label: "Catégorie", collection: Article::CATEGORIES %>
-      <%= f.input :start_date, as: :string, order: [:day, :month, :year] %>
-      <%= f.input :end_date, as: :string, order: [:day, :month, :year] %>
+      <%= f.input :start_date, as: :string, input_html: { type: 'datetime-local' } %>
+      <%= f.input :end_date, as: :string, input_html: { type: 'datetime-local' } %>
 
       <div class="d-flex justify-content-center btn btn-primary rounded">
         <%= f.button :submit %>
