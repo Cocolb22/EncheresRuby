@@ -5,8 +5,8 @@ class CreateArticles < ActiveRecord::Migration[7.0]
     create_table :articles do |t|
       t.string :name
       t.text :description
-      t.date :start_date
-      t.date :end_date
+      t.datetime :start_date
+      t.datetime :end_date
       t.integer :first_price
       t.integer :end_price
       t.string :image

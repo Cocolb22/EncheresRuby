@@ -42,8 +42,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_26_160350) do
   create_table "articles", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.date "start_date"
-    t.date "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.integer "first_price"
     t.integer "end_price"
     t.string "image"
