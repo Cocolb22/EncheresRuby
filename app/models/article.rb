@@ -18,6 +18,7 @@ class Article < ApplicationRecord
       first_price
     else
       bids.maximum(:bid_price)
+      return
     end
   end
 
