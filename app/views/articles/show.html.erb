@@ -9,21 +9,25 @@
         <p><%=@article.name %></p>
         <p><%=@article.description %></p>
         <p><%=@article.first_price %></p>
-        <p><%= @article.start_date.strftime('%Y-%m-%d %H:%M:%S') %></p>
-        <p><%= @article.end_date.strftime('%Y-%m-%d %H:%M:%S') %></p>
+        <p><%= @article.start_date.strftime('%d/%m/%Y %H:%M') %></p>
+        <p><%= @article.end_date.strftime('%d/%m/%Y %H:%M') %></p>
         
-        <p><%=@highest_bid %></p>
+        <% if @article.bids.count == 0 %>
+          <p><%=@article.first_price %></p>
+        <% else %>
+          <p><%= @article.get_highest_bid %></p>
+        <% end %>
 
-        <% if @article.start_date > DateTime.now && @article.end_date < DateTime.now %>
-          <%= simple_form_for [@article, @bid] do |f| %>
+        <% if @article.start_date < DateTime.now && @article.end_date > DateTime.now %>
+            <%= simple_form_for [@article, @bid] do |f| %>
             <%= f.input :bid_price %>
             <%= f.button :submit %>
           <% end %>
         <% end %>
     </div>
 
-
-
+  <p> <%= DateTime.now %></p>
+  <p> <%= @article.start_date %></p>
 
     <div class="container col-md-4 mt-4 pb-3">
       <ul class="d-flex justify-content-center">
@@ -41,12 +45,27 @@
       </ul>
     </div>
 
-    <div>
-      <% @article.bids.each do |bid| %>
-        <p>
-          <%= "Bid by #{bid.user.first_name}: #{bid.bid_price}" %>
-        </p>
-      <% end %>
+    <div class="container">
+      <table class=" table table-striped">
+          <thead>
+            <tr>
+            <div class="row d-flex text-justify-center">
+              <th scope="col" class="col-4">Pseudo</th>
+              <th scope="col" class="col-4">Montant</th>
+              <th scope="col" class="col-4">Date</th>
+            </div>
+            </tr>
+          </thead>
+          <tbody>
+            <% @bids.each do |bid| %>
+                <tr>
+                  <td><%= bid.user.first_name %></td>
+                  <td><%= bid.bid_price %></td>
+                  <td><%= bid.created_at.strftime('%d/%m/%Y %H:%M') %>
+                </tr>  
+            <% end %>
+          </tbody>
+      </table>  
     </div>
 
   </body>
