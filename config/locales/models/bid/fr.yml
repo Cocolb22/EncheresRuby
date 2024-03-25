@@ -1,0 +1,5 @@
+fr:
+  bid:
+    created: "Enchère créée"
+    not_created: "Enchère non créée, le montant ne peut être inférieur à "
+    amount: "Montant"
