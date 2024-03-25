@@ -1,17 +1,18 @@
 <body>
-  <div class="container col-md-4 mt-4 shadow-box border pb-3 rounded">
+  <div class="container col-md-4 mt-4 shadow-box border p-3 rounded">
+    <h3><%= t('globals.article_form.create_title') %></h3>
+    <br>
     <%= simple_form_for @article do |f| %>
-      <%= f.input :name %>
-      <%= f.input :description %>
-      <%= f.input :first_price %>
-      <%= f.input :category, label: "Catégorie", collection: Article::CATEGORIES %>
-      <%= f.input :start_date, as: :string, input_html: { type: 'datetime-local' } %>
-      <%= f.input :end_date, as: :string, input_html: { type: 'datetime-local' } %>
+      <%= f.input :name, label:  t("globals.article_form.title") %>
+      <%= f.input :description, label:  t("globals.article_form.description") %>
+      <%= f.input :first_price, label:  t("globals.article_form.price") %>
+      <%= f.input :category, label:  t("globals.article_form.categorie"), collection: Article::CATEGORIES %>
+      <%= f.input :start_date, as: :string, input_html: { type: 'datetime-local' }, label:  t("globals.article_form.start_date") %>
+      <%= f.input :end_date, as: :string, input_html: { type: 'datetime-local' }, label:  t("globals.article_form.end_date") %>
 
-      <div class="d-flex justify-content-center btn btn-primary rounded">
+      <div class="d-flex justify-content-center rounded red">
         <%= f.button :submit %>
       </div>
     <% end %>
   </div>
-
 </body>

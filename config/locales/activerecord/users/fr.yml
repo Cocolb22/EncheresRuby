@@ -18,3 +18,18 @@ fr:
               blank: "L'email ne peut pas être vide"
             password:
               blank: "Le mot de passe ne peut pas être vide"
+        article:
+          attributes:
+            title:
+              blank: "ne peut pas être vide"
+              taken: ""
+            description:
+              blank: "ne peut pas être vide"
+            start_date:
+              blank: "ne peut pas être vide"
+            end_date:
+              blank: "ne peut pas être vide"
+      messages:
+        blank: " ne peut pas être vide"
+        too_short: "est trop court"
+        not_a_number: "n'est pas un nombre"

@@ -2,16 +2,16 @@ class BidsController < ApplicationController
   def create
     @bid = Bid.new(bid_params)
     @article = Article.find(params[:article_id])
-    @bid.article = @article
-    @bid.user = current_user
-    
-    respond_to do |format|
+    if @article.status != 'Ouverte'
+      @bid.article = @article
+      @bid.user = current_user
+
       if @bid.save
-        format.html { redirect_to @article, notice: 'Bid was successfully created.' }
-        format.json { render json: { success: true } }
+        redirect_to article_path(@article)
+        flash[:success] = t('bid.created')
       else
-        format.html { render 'articles/show' }
-        format.json { render json: { errors: @bid.errors.full_messages }, status: :unprocessable_entity }
+        redirect_to article_path(@article)
+        flash[:danger] = t('bid.not_created') + " #{@article.get_highest_bid}"
       end
     end
   end

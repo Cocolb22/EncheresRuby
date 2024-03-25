@@ -1,6 +1,7 @@
 en:
   globals:
     home_page:
+      home: "Home"
       title: "PokéAuctions"
       poke_name: "Name"
       poke_description: "Description"
@@ -9,3 +10,20 @@ en:
     show_page:
       delete: "Delete"
       modify: "Modify"
+    article_form:
+      create_title: "Create your Pokémon auction"
+      poke_name: "Pokémon Name"
+      title: "Pokémon Name"
+      description: "Description"
+      categorie: "Category"
+      start_date: "Start Date"
+      end_date: "End Date"
+      first_price: "First Price"
+      actual_amount: "Actual Amount"
+      submit: "Submit"
+      on_going: "On going Auction"
+    table:
+      winner: "Winner"
+      not_start: "Not started"
+      ended: "Auction ended"
+

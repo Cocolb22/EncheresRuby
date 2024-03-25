@@ -1,57 +1,77 @@
-<div>
-
-  <nav>
-    <%= render "shared/navbar" %>
-  </nav>
-
-  <body>
-    <div class="container col-md-4 mt-4 pb-3 d-flex-column justify-content-center">
-        <p><%=@article.name %></p>
-        <p><%=@article.description %></p>
-        <p><%=@article.first_price %></p>
-        <p><%= @article.start_date.strftime('%d/%m/%Y %H:%M') %></p>
-        <p><%= @article.end_date.strftime('%d/%m/%Y %H:%M') %></p>
-        
-        <% if @article.bids.count == 0 %>
-          <p><%=@article.first_price %></p>
-        <% else %>
-          <p><%= @article.get_highest_bid %></p>
-        <% end %>
-
-        <% if @article.start_date < DateTime.now && @article.end_date > DateTime.now %>
-            <%= simple_form_for [@article, @bid] do |f| %>
-            <%= f.input :bid_price %>
-            <%= f.button :submit %>
-          <% end %>
-        <% end %>
+<body> 
+  <div class="container col-md-8 mt-4 pb-3 d-flex-column justify-content-center">
+    <h3><%= t('globals.article_form.on_going') %></h3>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th><%= t('globals.article_form.poke_name') %></th>
+              <td><%=@article.name %></td>
+            </tr>
+            <tr>
+              <th><%= t('globals.article_form.description') %></th>
+              <td><%=@article.description %></td>
+            </tr>
+            <tr>
+              <th><%= t('globals.article_form.first_price') %></th>
+              <td><%=@article.first_price %></td>
+            </tr>
+            <tr>
+              <th><%= t('globals.article_form.start_date') %></th>
+              <td><%= @article.start_date.strftime('%d/%m/%Y %H:%M') %></td>
+            </tr>
+            <tr>
+              <th><%= t('globals.article_form.end_date') %></th>
+              <td><%= @article.end_date.strftime('%d/%m/%Y %H:%M') %></td>
+            </tr>
+            <tr>
+              <th><%= t('globals.article_form.actual_amount') %></th>
+              <td><%=@article.bids.any? ? @highest_bid : @article.first_price %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
+  <div class="container col-md-8 mt-4 pb-3 d-flex justify-content-center">
+    <% if @article.start_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') && DateTime.now.strftime('%d/%m/%Y %H:%M') < @article.end_date.strftime('%d/%m/%Y %H:%M') %>
+          <%= simple_form_for [@article, @bid] do |f| %>
+            <%= f.input :bid_price, label: t("bid.amount") %>
+            <div class="d-flex justify-content-center rounded red">
+              <%= f.button :submit %>
+            </div>
+          <% end %>
+    <% end %>
+  </div>
 
-  <p> <%= DateTime.now %></p>
-  <p> <%= @article.start_date %></p>
-
-    <div class="container col-md-4 mt-4 pb-3">
-      <ul class="d-flex justify-content-center">
-        <% if current_user.id == @article_user&.id && @article.start_date > DateTime.now && @article.end_date >= DateTime.now %>
+  <div class="container col-md-4 mt-4 pb-3">
+    <ul class="d-flex justify-content-center">
+      <% if current_user.id == @article_user&.id %>
+        <% if DateTime.now.strftime('%d/%m/%Y %H:%M') < @article.start_date.strftime('%d/%m/%Y %H:%M') && DateTime.now.strftime('%d/%m/%Y %H:%M') > @article.end_date.strftime('%d/%m/%Y %H:%M') %>
           <li class="nav-item m-2">
-           <%= form_with(model: @article, method: :delete, url: article_path(@article), data: { turbo_confirm: "Are you sure?" }) do |form| %>
+          <%= form_with(model: @article, method: :delete, url: article_path(@article), data: { turbo_confirm: "Are you sure?" }) do |form| %>
             <%= form.button t("globals.show_page.delete"), type: :submit%>
             <% end %>
-
           </li>
           <li class="nav-item m-2">
             <%= link_to t("globals.show_page.modify"), edit_article_path(@article) %>
+          </li>
         <% end %>
-        </li>
-      </ul>
-    </div>
+      <% end %>
+      </li>
+    </ul>
+  </div>
 
-    <div class="container">
+  <div class="container">
+    <% if @article.start_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') && DateTime.now.strftime('%d/%m/%Y %H:%M') < @article.end_date.strftime('%d/%m/%Y %H:%M') %>
       <table class=" table table-striped">
           <thead>
             <tr>
             <div class="row d-flex text-justify-center">
               <th scope="col" class="col-4">Pseudo</th>
-              <th scope="col" class="col-4">Montant</th>
+              <th scope="col" class="col-4"><%= t('globals.article_form.actual_amount') %></th>
               <th scope="col" class="col-4">Date</th>
             </div>
             </tr>
@@ -65,12 +85,16 @@
                 </tr>  
             <% end %>
           </tbody>
-      </table>  
-    </div>
-
-  </body>
-
-
-
-
-</div>
+      </table>
+    <% else %>
+      <div class="d-flex align-items-center flex-column">
+        <% if @article.start_date.strftime('%d/%m/%Y %H:%M') > DateTime.now.strftime('%d/%m/%Y %H:%M') %>
+          <p><%= t('globals.table.not_start')%></p>
+        <% elsif @article.end_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') %>
+          <p><%= t('globals.table.ended')%></p>
+          <p><%= t('globals.table.winner')%> : <%= @winner %></p> 
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</body>

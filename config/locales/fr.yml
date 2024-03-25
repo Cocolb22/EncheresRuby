@@ -1,6 +1,7 @@
 fr:
   globals:
     home_page:
+      home: "Accueil"
       title: "PokéEnchères"
       poke_name: "Nom"
       poke_description: "Description"
@@ -9,3 +10,21 @@ fr:
     show_page:
       delete: "Supprimer"
       modify: "Modifier"
+    article_form:
+      create_title: "Créer votre enchère Pokémon"
+      poke_name: "Nom du Pokémon"
+      title: "Nom du Pokémon"
+      description: "Description"
+      categorie: "Catégorie"
+      start_date: "Date de début"
+      end_date: "Date de fin"
+      first_price: "Prix de départ"
+      actual_amount: "Montant actuel"
+      submit: "Valider"
+      on_going: "Vente en cours"
+    table:
+      winner: "Gagnant"
+      not_start: "Non commencé"
+      ended: "Vente terminée"
+    
+
