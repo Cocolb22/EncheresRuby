@@ -7,6 +7,13 @@ en:
       poke_description: "Description"
       poke_price: "First Price"
       create_article: "Create Article"
+    filter:
+      on_going: "On going"
+      not_start: "Not started"
+      ended: "Ended"
+      won: "Won"
+      where_i_bet: "Where I bet"
+      i_created: "I created"
     show_page:
       delete: "Delete"
       modify: "Modify"
