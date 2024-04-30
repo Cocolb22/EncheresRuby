@@ -26,4 +26,15 @@ en:
       winner: "Winner"
       not_start: "Not started"
       ended: "Auction ended"
+    user_form:
+      my_profile: "My Profile"
+      first_name: "First Name"
+      last_name: "Last Name"
+      email: "Email"
+      pseudo: "Pseudo"
+      phone: "Phone"
+      street: "Street"
+      city: "City"
+      zip_code: "Zip Code"
+      credit: "Credit"
 
