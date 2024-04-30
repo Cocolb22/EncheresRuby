@@ -8,7 +8,7 @@
     <ul class="navbar-nav">
       <% if user_signed_in? %>
         <li class="nav-item">
-          <p class="nav-link text-white"> Hello <%= current_user.first_name %></p>
+          <%= link_to t("globals.user_form.my_profile"), user_path(current_user), class:"nav-link" %>
         </li>
         <li>
         <%= link_to t('globals.home_page.home'), root_path, class:"nav-link" %></li>
