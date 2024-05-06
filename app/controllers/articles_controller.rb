@@ -10,10 +10,10 @@ class ArticlesController < ApplicationController
     @article.user = current_user
     @article.status = 'Créée'
     if @article.save
-      flash[:success] = 'Votre enchère a bien été créée'
+      flash[:success] = t('article.created')
       redirect_to root_path
     else
-      flash[:danger] = "Votre enchère n'a pas été créée"
+      flash[:danger] = t('article.not_created')
       render :new
     end
   end
@@ -34,20 +34,26 @@ class ArticlesController < ApplicationController
 
   def update
     @article = Article.find(params[:id])
-    if @article.update(article_params)
+    if (DateTime.now.strftime('%d/%m/%Y %H:%M') > @article.start_date.strftime('%d/%m/%Y %H:%M'))
       redirect_to article_path(@article)
-      flash[:message] = 'Votre enchère a bien été modifiée'
+      flash[:danger] =  t('article.cant_update_on_going')
+    elsif @article.update(article_params)
+      redirect_to article_path(@article)
+      flash[:message] = t('article.updated')
     else
       render :edit
     end
   end
-
+  
   def destroy
-    return unless @article.status == 'Créée'
-
     @article = Article.find(params[:id])
-    @article.destroy
-    redirect_to root_path
+    if (DateTime.now.strftime('%d/%m/%Y %H:%M') < @article.start_date.strftime('%d/%m/%Y %H:%M'))
+      @article.destroy
+      redirect_to root_path
+    else
+      flash[:danger] = t('article.cant_delete_on_going')
+      redirect_to article_path(@article)
+    end
   end
 
   private
@@ -57,15 +63,23 @@ class ArticlesController < ApplicationController
   end
 
   def open_auction
-    @article = Article.find(params[:id])
-    if @article.status != 'Ouverte'
-      @article.status.update('Ouverte')
-      @article.start_date.update(DateTime.now)
-      @article.save
-      redirect_to article_path(@article)
-    else
-      redirect_to article_path(@article)
-      flash[:warning] = 'Votre enchère est déjà ouverte'
+    @articles = Article.all
+    @articles.each do |article|
+      if article.start_date < DateTime.now
+        article.status.update('En cours')
+        @article.save
+        redirect_to article_path(@article)
+      end
     end
+  end
+
+  def close_auction
+    @articles = Article.all
+    @articles.each do |article|
+      if article.end_date < DateTime.now
+        article.status.update('Fermée')
+        article.save
+      end
+    end 
   end
 end

@@ -1,5 +1,6 @@
 fr:
   globals:
+    return: "Retour"
     home_page:
       home: "Accueil"
       title: "PokéEnchères"
@@ -22,6 +23,8 @@ fr:
       actual_amount: "Montant actuel"
       submit: "Valider"
       on_going: "Vente en cours"
+      create_article: "Créer un article"
+      modify_article: "Modifier un article"
     table:
       winner: "Gagnant"
       not_start: "Non commencé"
@@ -37,5 +40,6 @@ fr:
       city: "Ville"
       zip_code: "Code postal"
       credit: "Crédit"
+      update: "Mettre à jour"
     
 

@@ -1,3 +1,7 @@
 en:
   article:
     zero_winner: "No winner"
+    cant_update_on_going: "Your article cannot be updated. The bid is on going."
+    cant_delete_on_going: "Your article cannot be deleted. The bid is on going."
+    not_created: "Your article could not be created."
+    created: "Your article has been created."

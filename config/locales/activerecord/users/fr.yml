@@ -33,3 +33,4 @@ fr:
         blank: " ne peut pas être vide"
         too_short: "est trop court"
         not_a_number: "n'est pas un nombre"
+        record_invalid: "n'est pas valide"
