@@ -1,5 +1,6 @@
 en:
   globals:
+    return: "Return"
     home_page:
       home: "Home"
       title: "PokéAuctions"
@@ -22,6 +23,8 @@ en:
       actual_amount: "Actual Amount"
       submit: "Submit"
       on_going: "On going Auction"
+      create_article: "Create Article"
+      modify_article: "Modify Article"
     table:
       winner: "Winner"
       not_start: "Not started"
@@ -37,4 +40,5 @@ en:
       city: "City"
       zip_code: "Zip Code"
       credit: "Credit"
+      update: "Update"
 

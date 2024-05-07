@@ -33,7 +33,7 @@ gem 'jbuilder'
 gem 'devise'
 
 # Bootstrap
-gem 'bootstrap', '~> 5.3.2'
+gem 'bootstrap', '~> 5.3.3'
 
 # Font Awesome
 gem 'font-awesome-sass', '~> 6.1'

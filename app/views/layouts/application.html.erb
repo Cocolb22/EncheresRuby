@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Enchères</title>
+    <title>PokéEnchères</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,15 +11,13 @@
     
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <nav>
       <%= render "shared/navbar" %>
     </nav>
-      <%= render "shared/flash_messages" %>
-
+    <%= render "shared/flash_messages" %>
     <%= yield %>
-
-    <footer>
+    <footer class="footer mt-auto">
       <%= render "shared/footer" %>
     </footer>
   </body>

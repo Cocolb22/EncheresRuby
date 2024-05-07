@@ -1,3 +1,7 @@
 fr:
   article:
     zero_winner: "Aucun gagnant"
+    cant_update_on_going: "Votre article ne peut être modifié. L'enchère est en cours."
+    cant_delete_on_going: "Votre article ne peut être supprimé. L'enchère est en cours."
+    not_created: "Votre article n'a pas pu être créé."
+    created: "Votre article a été créé."

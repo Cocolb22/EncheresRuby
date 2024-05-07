@@ -1,0 +1,28 @@
+.delete-button {
+    border: none;
+    margin: 6px;
+    border-radius: 16px;
+    padding: 6px;
+    background-color: white;
+    width: 90px;
+
+    &:hover {
+        background-color: #ef4035;
+        filter: brightness(1.5);
+    }
+}
+
+.update-button {
+    border-radius: 16px;
+    margin: 6px;
+    padding: 6px;
+    background-color: white;
+    text-decoration: none !important;
+    color: black;
+    width: 90px;
+
+    &:hover {
+        background-color: #ef4035;
+        filter: brightness(1.5);
+    }
+}

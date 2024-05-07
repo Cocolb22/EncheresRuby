@@ -39,10 +39,11 @@ class Article < ApplicationRecord
   end
 
   def get_winner
-    if status == 'Fermée' && bids.count > 0
-      bids.order(bid_price: :desc).first.user
+    if end_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') && bids.count > 0
+      winning_bid = bids.order(bid_price: :desc).first
+      winner = winning_bid.user
     else
-      I18n.t('article.zero_winner')
+      return I18n.t('article.zero_winner')
     end
   end
 end
