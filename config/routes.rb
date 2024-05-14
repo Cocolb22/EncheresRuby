@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   resources :articles do
     resources :bids, only: [:create]
   end
+
+  get 'pokemons/index'
+
 end

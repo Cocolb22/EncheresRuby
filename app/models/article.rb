@@ -9,9 +9,6 @@ class Article < ApplicationRecord
   validate :date_fin_cannot_be_in_the_past
   validate :date_fin_cannot_be_before_date_debut
 
-  CATEGORIES = ['Pokémon combat', 'Pokémon eau', 'Pokémon feu', 'Pokémon plante', 'Pokémon électrique', 'Pokémon vol',
-                'Pokémon poison', 'Pokémon sol', 'Pokémon roche', 'Pokémon insecte', 'Pokémon spectre', 'Pokémon ténèbres', 'Pokémon psy', 'Pokémon acier', 'Pokémon glace', 'Pokémon dragon', 'Pokémon fée']
-
   def get_highest_bid
     if bids.count == 0
       first_price

@@ -5,3 +5,5 @@ fr:
     cant_delete_on_going: "Votre article ne peut être supprimé. L'enchère est en cours."
     not_created: "Votre article n'a pas pu être créé."
     created: "Votre article a été créé."
+    updated: "Votre article a été mis à jour."
+    deleted: "Votre article a été supprimé."

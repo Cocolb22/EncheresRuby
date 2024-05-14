@@ -44,6 +44,12 @@ gem 'simple_form'
 # Autoprefixer
 gem 'autoprefixer-rails'
 
+# Httparty
+gem 'httparty'
+
+#jquery-rails
+gem 'jquery-rails'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
