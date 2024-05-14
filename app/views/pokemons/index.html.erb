@@ -1,0 +1,15 @@
+<h1>Liste des Pokémon</h1>
+
+<div class="row">
+  <% @first_gen_pokemons.each do |pokemon| %>
+    <div class="col-md-3 mb-2">
+      <div class="card">
+        <img src="<%= pokemon['sprites']['regular'] %>" class="card-img-top" alt="<%= pokemon['name']['fr'] %>">
+        <div class="card-body">
+          <h5 class="card-title"><%= pokemon['name']['fr'] %> (<%= pokemon['pokedex_id'] %>)</h5>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+

@@ -5,3 +5,5 @@ en:
     cant_delete_on_going: "Your article cannot be deleted. The bid is on going."
     not_created: "Your article could not be created."
     created: "Your article has been created."
+    updated: "Your article has been updated."
+    deleted: "Your article has been deleted."

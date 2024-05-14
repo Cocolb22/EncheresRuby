@@ -1,4 +1,4 @@
-<body>
+<body data-pokemons="<%= @pokemons.to_json %>">
 
   <%= link_to root_path, class: "nav-link" do %>
     <div class="d-flex flex-row align-items-center m-3">
@@ -11,10 +11,15 @@
     <h3><%= t('globals.article_form.create_title') %></h3>
     <br>
     <%= simple_form_for @article do |f| %>
-      <%= f.input :name, label:  t("globals.article_form.title") %>
+      <%= f.input :name, label: t("globals.article_form.title"), input_html: { id: "pokemon-name-input", list: "pokemon-list" } %>
+      <datalist id="pokemon-list">
+        <% @first_gen_pokemons_names.each do |pokemon_name| %>
+          <option value="<%= pokemon_name %>">
+        <% end %>
+      </datalist>
       <%= f.input :description, label:  t("globals.article_form.description") %>
       <%= f.input :first_price, label:  t("globals.article_form.first_price") %>
-      <%= f.input :category, label:  t("globals.article_form.categorie"), collection: Article::CATEGORIES %>
+      <%= f.input :category, label:  t("globals.article_form.categorie"), input_html: { id: "pokemon-category-input" } %>
       <%= f.input :start_date, as: :string, input_html: { type: 'datetime-local' }, label:  t("globals.article_form.start_date") %>
       <%= f.input :end_date, as: :string, input_html: { type: 'datetime-local' }, label:  t("globals.article_form.end_date") %>
 
@@ -28,3 +33,5 @@
     <% end %>
   </div>
 </body>
+
+<%= javascript_include_tag 'pokemon_script' %>

@@ -3,6 +3,7 @@
 class ArticlesController < ApplicationController
   def new
     @article = Article.new
+    fetch_pokemons
   end
 
   def create
@@ -30,16 +31,17 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    fetch_pokemons
   end
 
   def update
     @article = Article.find(params[:id])
-    if (DateTime.now.strftime('%d/%m/%Y %H:%M') > @article.start_date.strftime('%d/%m/%Y %H:%M'))
+    if (@article.start_date.strftime('%d/%m/%Y %H:%M') < (DateTime.now.strftime('%d/%m/%Y %H:%M')))
       redirect_to article_path(@article)
       flash[:danger] =  t('article.cant_update_on_going')
     elsif @article.update(article_params)
       redirect_to article_path(@article)
-      flash[:message] = t('article.updated')
+      flash[:success] = t('article.updated')
     else
       render :edit
     end
@@ -47,12 +49,13 @@ class ArticlesController < ApplicationController
   
   def destroy
     @article = Article.find(params[:id])
-    if (DateTime.now.strftime('%d/%m/%Y %H:%M') < @article.start_date.strftime('%d/%m/%Y %H:%M'))
-      @article.destroy
-      redirect_to root_path
-    else
+    if (@article.start_date.strftime('%d/%m/%Y %H:%M') < (DateTime.now.strftime('%d/%m/%Y %H:%M')))
       flash[:danger] = t('article.cant_delete_on_going')
       redirect_to article_path(@article)
+    else
+      @article.destroy
+      redirect_to root_path
+      flash[:success] = t('article.deleted')
     end
   end
 
@@ -82,4 +85,23 @@ class ArticlesController < ApplicationController
       end
     end 
   end
+
+  def fetch_pokemons
+    response = HTTParty.get('https://tyradex.vercel.app/api/v1/pokemon', query: { limit: 151, offset: 1 })
+    @pokemons = JSON.parse(response.body)
+    
+    @pokemons_names = @pokemons.map { |pokemon| pokemon['name']['fr'] }
+    @first_gen_pokemons_names = @pokemons_names[1..151]
+
+    @first_gen_pokemons = []
+    @first_gen_pokemons = @pokemons.select { |pokemon| pokemon['generation'] == 1 }
+    @first_gen_pokemons_category = @first_gen_pokemons.flat_map do |pokemon|
+      if pokemon['types'].is_a?(Array)
+        pokemon['types'].map { |type| type['name'] }
+      else
+        []
+      end
+    end.uniq
+  end
+  
 end

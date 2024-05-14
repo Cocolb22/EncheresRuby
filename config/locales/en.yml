@@ -7,6 +7,7 @@ en:
       poke_name: "Name"
       poke_description: "Description"
       poke_price: "First Price"
+      poke_start_date: "Start Date"
       create_article: "Create Article"
     show_page:
       delete: "Delete"
