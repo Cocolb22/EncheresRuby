@@ -48,7 +48,7 @@
           <%= simple_form_for [@article, @bid] do |f| %>
             <%= f.input :bid_price, label: t("bid.amount") %>
             <div class="d-flex justify-content-center rounded red">
-              <%= f.button :submit %>
+              <%= f.button :submit, value: t("bid.create_bid") %>
             </div>
           <% end %>
     <% end %>
@@ -90,7 +90,7 @@
                   <td><%= bid.user.first_name %></td>
                   <td><%= bid.bid_price %></td>
                   <td><%= bid.created_at.strftime('%d/%m/%Y %H:%M') %>
-                </tr>  
+                </tr>
             <% end %>
           </tbody>
       </table>
@@ -100,8 +100,19 @@
         <p><%= t('globals.table.not_start')%></p>
       <% elsif @article.end_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') %>
         <p><%= t('globals.table.ended')%></p>
-        <p><%= t('globals.table.winner')%> : <%= @winner %></p> 
+        <% if @winner.is_a?(User) %>
+          <p><%= t('globals.table.winner')%> : <%= @winner.pseudo %></p>
+        <% else %>
+          <p><%= t('globals.table.winner')%> : <%= @winner %></p>
+        <% end %>
       <% end %>
     </div>
+    <% if @winner.is_a?(User) && @winner.id == current_user.id %>
+      <div class="d-flex justify-content-center">
+        <div class="rounded red p-2 m-2 w-50 text-center">
+            <%= link_to t("article.withdraw_link"), withdraw_article_path(@article), class: "text-dark" %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </body>

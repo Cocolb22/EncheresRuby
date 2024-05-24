@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
+
+  before_action :set_article, only: [:show, :withdraw]
+
   def new
     @article = Article.new
     fetch_pokemons
@@ -46,7 +49,7 @@ class ArticlesController < ApplicationController
       render :edit
     end
   end
-  
+
   def destroy
     @article = Article.find(params[:id])
     if (@article.start_date.strftime('%d/%m/%Y %H:%M') < (DateTime.now.strftime('%d/%m/%Y %H:%M')))
@@ -59,7 +62,18 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def withdraw
+    @winner = @article.get_winner
+    if @winner.is_a?(User) && @winner.id != current_user.id
+      redirect_to article_path(@article), alert: 'Vous n\'êtes pas autorisé à accéder à cette page.'
+    end
+  end
+
   private
+
+  def set_article
+    @article = Article.find(params[:id])
+  end
 
   def article_params
     params.require(:article).permit(:name, :description, :first_price, :start_date, :end_date, :category)
@@ -83,13 +97,13 @@ class ArticlesController < ApplicationController
         article.status.update('Fermée')
         article.save
       end
-    end 
+    end
   end
 
   def fetch_pokemons
     response = HTTParty.get('https://tyradex.vercel.app/api/v1/pokemon', query: { limit: 151, offset: 1 })
     @pokemons = JSON.parse(response.body)
-    
+
     @pokemons_names = @pokemons.map { |pokemon| pokemon['name']['fr'] }
     @first_gen_pokemons_names = @pokemons_names[1..151]
 
@@ -103,5 +117,5 @@ class ArticlesController < ApplicationController
       end
     end.uniq
   end
-  
+
 end
