@@ -7,3 +7,12 @@ fr:
     created: "Votre article a été créé."
     updated: "Votre article a été mis à jour."
     deleted: "Votre article a été supprimé."
+    withdraw_link: "Récupérer votre Pokémon"
+    withdraw:
+      title: "Retrait"
+      congrats: "Félicitations, vous avez gagné l'enchère pour "
+      address: "Vous pouvez retirer votre article à l'adresse suivante :"
+      street: "Rue"
+      city: "Ville"
+      postal_code: "Code Postal"
+      return_link: "Retour à l'article"

@@ -7,3 +7,4 @@ en:
     article_not_active: "The sale is not active"
     already_leading: "You are already the leading bidder"
     cant_be_first_bidder: "You can't be the first bidder of your own article"
+    create_bid: "Bid"

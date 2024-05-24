@@ -1,0 +1,12 @@
+<div class="container col-md-4 mt-4 shadow-box border p-2 rounded">
+  <h1><%= t('article.withdraw.title') %></h1>
+  <p><%= t('article.withdraw.congrats') %> <%= @article.name %></p>
+  <p><%= t('article.withdraw.address') %></p>
+  <p><%= t('article.withdraw.street') %> : <%= @article.user.street %></p>
+  <p><%= t('article.withdraw.city') %> : <%= @article.user.city %></p>
+  <p><%= t('article.withdraw.postal_code') %> : <%= @article.user.zip_code %></p>
+
+  <div class="d-flex justify-content-center rounded red mt-2 w-50 m-auto">
+    <%= link_to t('article.withdraw.return_link'), article_path(@article), class:"text-dark" %>
+  </div>
+</div>
