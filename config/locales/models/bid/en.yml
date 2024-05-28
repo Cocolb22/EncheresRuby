@@ -3,3 +3,8 @@ en:
     created: "Bid created"
     not_created: "Bid not created, the amount can't be lower than "
     amount: "Amount"
+    not_enough: "You don't have enough credit to bid"
+    article_not_active: "The sale is not active"
+    already_leading: "You are already the leading bidder"
+    cant_be_first_bidder: "You can't be the first bidder of your own article"
+    create_bid: "Bid"

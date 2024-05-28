@@ -1,3 +1,18 @@
 fr:
   article:
     zero_winner: "Aucun gagnant"
+    cant_update_on_going: "Votre article ne peut être modifié. L'enchère est en cours."
+    cant_delete_on_going: "Votre article ne peut être supprimé. L'enchère est en cours."
+    not_created: "Votre article n'a pas pu être créé."
+    created: "Votre article a été créé."
+    updated: "Votre article a été mis à jour."
+    deleted: "Votre article a été supprimé."
+    withdraw_link: "Récupérer votre Pokémon"
+    withdraw:
+      title: "Retrait"
+      congrats: "Félicitations, vous avez gagné l'enchère pour "
+      address: "Vous pouvez retirer votre article à l'adresse suivante :"
+      street: "Rue"
+      city: "Ville"
+      postal_code: "Code Postal"
+      return_link: "Retour à l'article"

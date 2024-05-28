@@ -1,3 +1,18 @@
 en:
   article:
     zero_winner: "No winner"
+    cant_update_on_going: "Your article cannot be updated. The bid is on going."
+    cant_delete_on_going: "Your article cannot be deleted. The bid is on going."
+    not_created: "Your article could not be created."
+    created: "Your article has been created."
+    updated: "Your article has been updated."
+    deleted: "Your article has been deleted."
+    withdraw_link: "Get your Pokémon"
+    withdraw:
+      title: "Withdrawal"
+      congrats: "Congratulations, you have won the auction for "
+      address: "You can pick up your item at the following address:"
+      street: "Street"
+      city: "City"
+      postal_code: "Postal Code"
+      return_link: "Back to the article"

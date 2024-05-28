@@ -1,18 +1,37 @@
-<body>
+<body data-pokemons="<%= @pokemons.to_json %>">
+
+  <%= link_to root_path, class: "nav-link" do %>
+    <div class="d-flex flex-row align-items-center m-3">
+      <img src="/assets/arrow-bar-left.svg" alt="arrow-bar-left">
+      <span class="ml-2"><%= t("globals.return") %></span>
+    </div>
+  <% end %>
+
   <div class="container col-md-4 mt-4 shadow-box border p-3 rounded">
     <h3><%= t('globals.article_form.create_title') %></h3>
     <br>
     <%= simple_form_for @article do |f| %>
-      <%= f.input :name, label:  t("globals.article_form.title") %>
+      <%= f.input :name, label: t("globals.article_form.title"), input_html: { id: "pokemon-name-input", list: "pokemon-list" } %>
+      <datalist id="pokemon-list">
+        <% @first_gen_pokemons_names.each do |pokemon_name| %>
+          <option value="<%= pokemon_name %>">
+        <% end %>
+      </datalist>
       <%= f.input :description, label:  t("globals.article_form.description") %>
-      <%= f.input :first_price, label:  t("globals.article_form.price") %>
-      <%= f.input :category, label:  t("globals.article_form.categorie"), collection: Article::CATEGORIES %>
+      <%= f.input :first_price, label:  t("globals.article_form.first_price") %>
+      <%= f.input :category, label:  t("globals.article_form.categorie"), input_html: { id: "pokemon-category-input" } %>
       <%= f.input :start_date, as: :string, input_html: { type: 'datetime-local' }, label:  t("globals.article_form.start_date") %>
       <%= f.input :end_date, as: :string, input_html: { type: 'datetime-local' }, label:  t("globals.article_form.end_date") %>
 
       <div class="d-flex justify-content-center rounded red">
-        <%= f.button :submit %>
+       <% if @article.new_record? %>
+          <%= f.button :submit, value: t("globals.article_form.create_article") %>
+        <% else %>
+          <%= f.button :submit, value: t("globals.article_form.modify_article") %>
+        <% end %>
       </div>
     <% end %>
   </div>
 </body>
+
+<%= javascript_include_tag 'pokemon_script' %>

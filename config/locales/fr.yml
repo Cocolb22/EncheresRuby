@@ -1,11 +1,13 @@
 fr:
   globals:
+    return: "Retour"
     home_page:
       home: "Accueil"
       title: "PokéEnchères"
       poke_name: "Nom"
       poke_description: "Description"
       poke_price: "Prix de départ"
+      poke_start_date: "Date de début"
       create_article: Créer un article
     filter:
       filter: "Filtrer"
@@ -31,9 +33,23 @@ fr:
       actual_amount: "Montant actuel"
       submit: "Valider"
       on_going: "Vente en cours"
+      create_article: "Créer un article"
+      modify_article: "Modifier un article"
     table:
       winner: "Gagnant"
       not_start: "Non commencé"
       ended: "Vente terminée"
+    user_form:
+      my_profile: "Mon profil"
+      first_name: "Prénom"
+      last_name: "Nom"
+      email: "Email"
+      pseudo: "Pseudo"
+      phone: "Téléphone"
+      street: "Rue"
+      city: "Ville"
+      zip_code: "Code postal"
+      credit: "Crédit"
+      update: "Mettre à jour"
     
 

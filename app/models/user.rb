@@ -7,5 +7,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :first_name, :last_name, :pseudo, presence: true
-  validates :pseudo, uniqueness: true
+  validates :pseudo, :email, uniqueness: true
 end

@@ -1,11 +1,13 @@
 en:
   globals:
+    return: "Return"
     home_page:
       home: "Home"
       title: "PokéAuctions"
       poke_name: "Name"
       poke_description: "Description"
       poke_price: "First Price"
+      poke_start_date: "Start Date"
       create_article: "Create Article"
     filter:
       on_going: "On going"
@@ -29,8 +31,22 @@ en:
       actual_amount: "Actual Amount"
       submit: "Submit"
       on_going: "On going Auction"
+      create_article: "Create Article"
+      modify_article: "Modify Article"
     table:
       winner: "Winner"
       not_start: "Not started"
       ended: "Auction ended"
+    user_form:
+      my_profile: "My Profile"
+      first_name: "First Name"
+      last_name: "Last Name"
+      email: "Email"
+      pseudo: "Pseudo"
+      phone: "Phone"
+      street: "Street"
+      city: "City"
+      zip_code: "Zip Code"
+      credit: "Credit"
+      update: "Update"
 

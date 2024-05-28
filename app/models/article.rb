@@ -9,9 +9,6 @@ class Article < ApplicationRecord
   validate :date_fin_cannot_be_in_the_past
   validate :date_fin_cannot_be_before_date_debut
 
-  CATEGORIES = ['Pokémon combat', 'Pokémon eau', 'Pokémon feu', 'Pokémon plante', 'Pokémon électrique', 'Pokémon vol',
-                'Pokémon poison', 'Pokémon sol', 'Pokémon roche', 'Pokémon insecte', 'Pokémon spectre', 'Pokémon ténèbres', 'Pokémon psy', 'Pokémon acier', 'Pokémon glace', 'Pokémon dragon', 'Pokémon fée']
-
   def get_highest_bid
     if bids.count == 0
       first_price
@@ -39,10 +36,23 @@ class Article < ApplicationRecord
   end
 
   def get_winner
-    if status == 'Fermée' && bids.count > 0
-      bids.order(bid_price: :desc).first.user
+    if end_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') && bids.count > 0
+      winning_bid = bids.order(bid_price: :desc).first
+      winner = winning_bid.user
+      credit_enchere_creator(winning_bid) unless paid
+      winner
     else
-      I18n.t('article.zero_winner')
+      return I18n.t('article.zero_winner')
     end
   end
+
+  def credit_enchere_creator(winning_bid)
+    return if paid
+    if end_date < DateTime.now && bids.count > 0
+      creator = self.user
+      creator.update(credit: creator.credit + winning_bid.bid_price)
+      update(paid: true)
+    end
+  end
+
 end

@@ -1,0 +1,28 @@
+<body>
+
+  <%= link_to root_path, class: "nav-link" do %>
+    <div class="d-flex flex-row align-items-center m-3">
+      <img src="/assets/arrow-bar-left.svg" alt="arrow-bar-left">
+      <span class="ml-2"><%= t("globals.return") %></span>
+    </div>
+  <% end %>
+  
+  <div class="container col-md-4 mt-4 shadow-box border p-3 rounded">
+    
+    <%= simple_form_for @user do |f| %>
+      <%= f.input :pseudo, label:  t("globals.user_form.pseudo") %>
+      <%= f.input :first_name, label:  t("globals.user_form.first_name") %>
+      <%= f.input :last_name, label:  t("globals.user_form.last_name") %>
+      <%= f.input :email, label:  t("globals.user_form.email") %>
+      <%= f.input :phone, label:  t("globals.user_form.phone")%>
+      <%= f.input :street, label:  t("globals.user_form.street") %>
+      <%= f.input :zip_code, label:  t("globals.user_form.zip_code") %>
+      <%= f.input :city, label:  t("globals.user_form.city") %>
+      <%= f.input :credit, label:  t("globals.user_form.credit"), :readonly => true %>
+
+      <div class="d-flex justify-content-center rounded red">
+        <%= f.button :submit, value: t("globals.user_form.update") %>
+      </div>
+    <% end %>
+  </div>
+</body>

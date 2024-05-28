@@ -48,22 +48,26 @@
     </div>
     <div class="row">
       <% @articles.each do |article| %>
-          <div class="card mb-3 m-2" style="max-width: 400px;">
+        <div class="col-md-4 mb-3">
+          <div class="card">
             <%= link_to article_path(article), class: "nav-link" do %>
               <div class="row g-0">
                 <div class="col-md-6">
-                  <%= image_tag "marteau.jpeg", style: "max-width: 200px" %>
+                  <%= image_tag "marteau.jpeg", class: "img-fluid p-2" %>
                 </div>
-                <div class="col-md-6">
-                  <div class="card-body">
+                <div class="col-md-6" style="height: 175px">
+                  <div class="h-50 pt-3">
                     <h5 class="card-title"><%= t("globals.home_page.poke_name") %>: <%= article.name.capitalize %></h5>
-                    <p class="card-text"><%= t("globals.home_page.poke_description") %>: <%= article.description.capitalize %></p>
+                  </div>
+                  <div class="h-50">
                     <p class="card-text"><%= t("globals.home_page.poke_price") %>: <%= article.first_price %></p>
+                    <p class="card-text"><%= t("globals.home_page.poke_start_date") %>: <%= article.start_date.strftime('%d/%m/%Y %H:%M') %></p>
                   </div>
                 </div>
               </div>
             <% end %>
           </div>
+        </div>
       <% end %>
     </div>
   </div>

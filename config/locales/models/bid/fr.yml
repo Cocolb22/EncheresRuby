@@ -3,3 +3,8 @@ fr:
     created: "Enchère créée"
     not_created: "Enchère non créée, le montant ne peut être inférieur à "
     amount: "Montant"
+    not_enough: "Vous n'avez pas assez de crédit pour enchérir"
+    article_not_active: "La vente n'est pas en cours"
+    already_leading: "Vous êtes déjà le meilleur enchérisseur"
+    cant_be_first_bidder: "Vous ne pouvez pas être le premier enchérisseur de votre article"
+    create_bid: "Enchérir"

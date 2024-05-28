@@ -14,4 +14,9 @@ Rails.application.routes.draw do
   resources :articles do
     resources :bids, only: [:create]
   end
+
+  get 'articles/:id/withdraw', to: 'articles#withdraw', as: 'withdraw_article'
+
+  get 'pokemons/index'
+
 end
