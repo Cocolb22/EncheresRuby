@@ -3,7 +3,7 @@
     <h1> <%= t("globals.home_page.title") %></h1>
     <div data-controller="articles-filter">
       <div class="row">
-        <div class="col-6"> 
+        <div class="col-6">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="NotStart" id="filterNotStart">
                 <label class="form-check-label" for="notStart">
@@ -23,7 +23,7 @@
                 </label>
             </div>
         </div>
-        <div class="col-6"> 
+        <div class="col-6">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="Won" id="filterWon">
                 <label class="form-check-label" for="won">
@@ -43,12 +43,17 @@
                 </label>
             </div>
         <div>
-      </div>    
-
+      </div>
     </div>
-    <div class="row">
+    <div class="row" id="articles-list">
       <% @articles.each do |article| %>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 mb-3 article"
+          data-current-user-id="<%= current_user.id %>"
+          data-start-date="<%= article.start_date %>"
+          data-end-date="<%= article.end_date %>"
+          data-user-id="<%= article.user_id %>"
+          data-current-user-id="<%= current_user.id %>"
+          data-bids='<%= article.bids.to_json %>'>
           <div class="card">
             <%= link_to article_path(article), class: "nav-link" do %>
               <div class="row g-0">
@@ -72,3 +77,5 @@
     </div>
   </div>
 </body>
+
+<%= javascript_include_tag 'filters' %>

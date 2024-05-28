@@ -4,4 +4,5 @@
 //= link bootstrap.min.js
 //= link_tree ../../../vendor/javascript .js
 //= link application.js
-  //= link pokemon_script.js
+//= link pokemon_script.js
+//= link filters.js
