@@ -3,7 +3,7 @@
     <h1> <%= t("globals.home_page.title") %></h1>
     <div data-controller="articles-filter">
       <div class="row">
-        <div class="col-6">
+        <div class="col-6 mb-2">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="NotStart" id="filterNotStart">
                 <label class="form-check-label" for="notStart">
@@ -42,17 +42,21 @@
                     <%= t('globals.filter.i_created') %>
                 </label>
             </div>
-        <div>
+        </div>
       </div>
     </div>
+    <div>
+      <input type="text" id="searchInput" class="form-control col-md-3 mb-3" placeholder="Rechercher par nom...">
+    </div>
+
     <div class="row" id="articles-list">
       <% @articles.each do |article| %>
         <div class="col-md-4 mb-3 article"
-          data-current-user-id="<%= current_user.id %>"
+          data-name="<%= article.name.downcase %>"
+          data-current-user-id="<%= @current_user_id %>"
           data-start-date="<%= article.start_date %>"
           data-end-date="<%= article.end_date %>"
           data-user-id="<%= article.user_id %>"
-          data-current-user-id="<%= current_user.id %>"
           data-bids='<%= article.bids.to_json %>'>
           <div class="card">
             <%= link_to article_path(article), class: "nav-link" do %>

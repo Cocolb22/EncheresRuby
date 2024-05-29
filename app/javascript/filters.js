@@ -2,10 +2,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const checkboxes = document.querySelectorAll('.form-check-input');
     const articlesContainer = document.getElementById('articles-list');
     const articles = Array.from(document.querySelectorAll('.article'));
+    const searchInput = document.getElementById('searchInput');
 
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', filterArticles);
     });
+
+    searchInput.addEventListener('input', filterByName);
 
     function filterArticles() {
         const filters = {
@@ -21,15 +24,13 @@ document.addEventListener("DOMContentLoaded", function() {
         const currentUserElement = document.querySelector('[data-current-user-id]');
         const currentUserId = currentUserElement ? currentUserElement.getAttribute('data-current-user-id') : null;
 
-        // Vérifier si aucun filtre n'est appliqué
         const noFilterApplied = !Object.values(filters).some(value => value);
 
-        // Si aucun filtre n'est appliqué, afficher tous les articles
         if (noFilterApplied) {
             articles.forEach(article => {
                 article.closest('.col-md-4').style.display = 'block';
             });
-            // Supprimer le message "Aucun article correspondant aux filtres."
+
             const noArticlesMessage = articlesContainer.querySelector('.no-articles-message');
             if (noArticlesMessage) {
                 noArticlesMessage.remove();
@@ -64,13 +65,11 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
-        // Supprimer le message "Aucun article correspondant aux filtres."
         const noArticlesMessage = articlesContainer.querySelector('.no-articles-message');
         if (noArticlesMessage) {
             noArticlesMessage.remove();
         }
 
-        // Ajouter le message si aucun article ne correspond aux filtres
         if (filteredArticles.length === 0) {
             const message = document.createElement('p');
             message.classList.add('no-articles-message');
@@ -78,4 +77,30 @@ document.addEventListener("DOMContentLoaded", function() {
             articlesContainer.appendChild(message);
         }
     }
+
+    function filterByName() {
+      const searchQuery = searchInput.value.toLowerCase();
+
+      articles.forEach(article => {
+          const articleName = article.getAttribute('data-name');
+          if (articleName.includes(searchQuery)) {
+              article.closest('.col-md-4').style.display = 'block';
+          } else {
+              article.closest('.col-md-4').style.display = 'none';
+          }
+      });
+
+      const noArticlesMessage = articlesContainer.querySelector('.no-articles-message');
+      if (noArticlesMessage) {
+          noArticlesMessage.remove();
+      }
+
+      const visibleArticles = articles.filter(article => article.closest('.col-md-4').style.display !== 'none');
+      if (visibleArticles.length === 0) {
+          const message = document.createElement('p');
+          message.classList.add('no-articles-message');
+          message.textContent = 'Aucun article correspondant aux filtres.';
+          articlesContainer.appendChild(message);
+      }
+  }
 });
