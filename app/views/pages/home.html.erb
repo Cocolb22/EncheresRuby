@@ -51,7 +51,7 @@
 
     <div class="row" id="articles-list">
       <% @articles.each do |article| %>
-        <div class="col-md-4 mb-3 article"
+        <div class="col-md-4 mb-3"
           data-name="<%= article.name.downcase %>"
           data-current-user-id="<%= @current_user_id %>"
           data-start-date="<%= article.start_date %>"
