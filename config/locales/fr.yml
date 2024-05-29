@@ -9,6 +9,15 @@ fr:
       poke_price: "Prix de départ"
       poke_start_date: "Date de début"
       create_article: Créer un article
+    filter:
+      filter: "Filtrer"
+      all: "Tous"
+      on_going: "En cours"
+      not_start: "Non commencé"
+      ended: "Terminé"
+      won: "Gagné"
+      where_i_bet: "Où j'ai misé"
+      i_created: "Que j'ai créé"
     show_page:
       delete: "Supprimer"
       modify: "Modifier"
