@@ -40,6 +40,7 @@ class Article < ApplicationRecord
       winning_bid = bids.order(bid_price: :desc).first
       winner = winning_bid.user
       credit_enchere_creator(winning_bid) unless paid
+      WinnerMailer.winner_mailer(winner, self).deliver_now
       winner
     else
       return I18n.t('article.zero_winner')

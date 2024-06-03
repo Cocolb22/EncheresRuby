@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1> <%= t("winning_message_title") %> </h1>
+
+      <p> <%= t("winning_congratulations") %> <%= @user.pseudo %></p>
+
+      <p> <%= t("winning_sentence_1") %> <%= article.get_highest_bid %></p>
+
+      <p> <%= t("winning_yours")  article.name %>,<%= t("winning_transfert") %></p>
+
+      <p> <%= t("winning_thanks") %></p>
+
+      <p> <%= t("winning_goodbye") %></p>
+
+      <p>PokéEnchèresTeam</p>
+  </body>
+</html>
