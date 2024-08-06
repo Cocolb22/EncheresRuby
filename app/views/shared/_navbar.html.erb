@@ -19,11 +19,11 @@
       <% end %>
       <% if I18n.locale == :fr %>
         <li class="nav-item">
-          <%= link_to "En", url_for(locale: 'en'), class: 'nav-link' %>
+          <%= link_to "En", url_for(locale: 'en'), class:"nav-link" %>
         </li>
       <% else %>
         <li class="nav-item">
-          <%= link_to "Fr", url_for(locale: 'fr'), class: 'nav-link' %>
+          <%= link_to "Fr", url_for(locale: 'fr'), class:"nav-link" %>
         </li>
       <% end %>
     </ul>
@@ -37,15 +37,15 @@
               <%= link_to t("globals.home_page.create_article"), new_article_path, class:"nav-link" %>
             </li>
           <% end %>
-          <li class="nav-item mx-2">
-            <%= link_to t("devise.connexion.log_out"), destroy_user_session_path, method: :delete, class:"nav-link" %>
+          <li class="logout-link mx-2">
+            <%= button_to t("devise.connexion.log_out"), destroy_user_session_path, method: :delete, class:"logout-link" %>
           </li>
         <% else %>
           <li class="nav-item mx-2">
-            <%= link_to t("devise.connexion.login"), new_user_session_path, class: 'nav-link' %>
+            <%= link_to t("devise.connexion.login"), new_user_session_path, class:"nav-link" %>
           </li>
           <li class="nav-item mx-2">
-            <%= link_to t("devise.connexion.sign_up"), new_user_registration_path, class: 'nav-link' %>
+            <%= link_to t("devise.connexion.sign_up"), new_user_registration_path, class:"nav-link" %>
           </li>
         <% end %>
       </ul>

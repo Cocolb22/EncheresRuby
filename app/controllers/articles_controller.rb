@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ArticlesController < ApplicationController
-
-  before_action :set_article, only: [:show, :withdraw]
+  before_action :set_article, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: %i[create edit update destroy]
 
   def new
     @article = Article.new
@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
+    authorize @article
     @user = current_user
     @article_user = User.find(@article.user_id)
     @bids = @article.bids.order(bid_price: :desc)
@@ -33,15 +33,15 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
+    authorize @article
     fetch_pokemons
   end
 
   def update
-    @article = Article.find(params[:id])
-    if (@article.start_date.strftime('%d/%m/%Y %H:%M') < (DateTime.now.strftime('%d/%m/%Y %H:%M')))
+    authorize @article
+    if @article.start_date.strftime('%d/%m/%Y %H:%M') < (DateTime.now.strftime('%d/%m/%Y %H:%M'))
       redirect_to article_path(@article)
-      flash[:danger] =  t('article.cant_update_on_going')
+      flash[:danger] = t('article.cant_update_on_going')
     elsif @article.update(article_params)
       redirect_to article_path(@article)
       flash[:success] = t('article.updated')
@@ -51,8 +51,8 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
-    if (@article.start_date.strftime('%d/%m/%Y %H:%M') < (DateTime.now.strftime('%d/%m/%Y %H:%M')))
+    authorize @article
+    if @article.start_date.strftime('%d/%m/%Y %H:%M') < (DateTime.now.strftime('%d/%m/%Y %H:%M'))
       flash[:danger] = t('article.cant_delete_on_going')
       redirect_to article_path(@article)
     else
@@ -64,9 +64,9 @@ class ArticlesController < ApplicationController
 
   def withdraw
     @winner = @article.get_winner
-    if @winner.is_a?(User) && @winner.id != current_user.id
-      redirect_to article_path(@article), alert: 'Vous n\'êtes pas autorisé à accéder à cette page.'
-    end
+    return unless @winner.is_a?(User) && @winner.id != current_user.id
+
+    redirect_to article_path(@article), alert: 'Vous n\'êtes pas autorisé à accéder à cette page.'
   end
 
   private
@@ -82,11 +82,11 @@ class ArticlesController < ApplicationController
   def open_auction
     @articles = Article.all
     @articles.each do |article|
-      if article.start_date < DateTime.now
-        article.status.update('En cours')
-        @article.save
-        redirect_to article_path(@article)
-      end
+      next unless article.start_date < DateTime.now
+
+      article.status.update('En cours')
+      @article.save
+      redirect_to article_path(@article)
     end
   end
 
@@ -117,5 +117,4 @@ class ArticlesController < ApplicationController
       end
     end.uniq
   end
-
 end

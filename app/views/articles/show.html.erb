@@ -56,16 +56,18 @@
 
   <div class="container col-md-4 mt-4 pb-3">
     <ul class="d-flex justify-content-center">
-      <% if current_user.id == @article_user&.id %>
-        <% if @article.start_date.strftime('%d/%m/%Y %H:%M') > DateTime.now.strftime('%d/%m/%Y %H:%M') %>
-          <li class="nav-item m-2">
-          <%= form_with(model: @article, method: :delete, url: article_path(@article), data: { turbo_confirm: "Are you sure?" }) do |form| %>
-            <%= form.button t("globals.show_page.delete"), class: "delete-button text-center", type: :submit%>
-            <% end %>
-          </li>
-          <li class="nav-item m-2 d-flex justify-content-center text-center">
-            <%= link_to t("globals.show_page.modify"), edit_article_path(@article), class:"update-button" %>
-          </li>
+      <% if user_signed_in? %>
+        <% if current_user.id == @article_user&.id %>
+          <% if @article.start_date.strftime('%d/%m/%Y %H:%M') > DateTime.now.strftime('%d/%m/%Y %H:%M') %>
+            <li class="nav-item m-2">
+            <%= form_with(model: @article, method: :delete, url: article_path(@article), data: { turbo_confirm: "Are you sure?" }) do |form| %>
+              <%= form.button t("globals.show_page.delete"), class: "delete-button text-center", type: :submit%>
+              <% end %>
+            </li>
+            <li class="nav-item m-2 d-flex justify-content-center text-center">
+              <%= link_to t("globals.show_page.modify"), edit_article_path(@article), class:"update-button" %>
+            </li>
+          <% end %>
         <% end %>
       <% end %>
       </li>

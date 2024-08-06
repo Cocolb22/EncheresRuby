@@ -47,8 +47,16 @@ gem 'autoprefixer-rails'
 # Httparty
 gem 'httparty'
 
-#jquery-rails
+# jquery-rails
 gem 'jquery-rails'
+
+# Pundit
+gem 'pundit'
+
+# Pry
+gem 'pry'
+gem 'pry-byebug'
+gem 'pry-rails'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"

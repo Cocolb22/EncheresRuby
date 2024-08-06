@@ -36,23 +36,23 @@ class Article < ApplicationRecord
   end
 
   def get_winner
-    if end_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') && bids.count > 0
-      winning_bid = bids.order(bid_price: :desc).first
-      winner = winning_bid.user
-      credit_enchere_creator(winning_bid) unless paid
-      winner
-    else
+    unless end_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') && bids.count > 0
       return I18n.t('article.zero_winner')
     end
+
+    winning_bid = bids.order(bid_price: :desc).first
+    winner = winning_bid.user
+    credit_enchere_creator(winning_bid) unless paid
+    winner
   end
 
   def credit_enchere_creator(winning_bid)
     return if paid
-    if end_date < DateTime.now && bids.count > 0
-      creator = self.user
-      creator.update(credit: creator.credit + winning_bid.bid_price)
-      update(paid: true)
-    end
-  end
 
+    return unless end_date < DateTime.now && bids.count > 0
+
+    creator = user
+    creator.update(credit: creator.credit + winning_bid.bid_price)
+    update(paid: true)
+  end
 end
