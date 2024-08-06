@@ -50,6 +50,14 @@ gem 'httparty'
 #jquery-rails
 gem 'jquery-rails'
 
+# Pundit
+gem 'pundit'
+
+# Pry
+gem 'pry'
+gem 'pry-rails'
+gem 'pry-byebug'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

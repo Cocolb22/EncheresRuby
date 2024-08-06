@@ -2,7 +2,8 @@
 
 class ArticlesController < ApplicationController
 
-  before_action :set_article, only: [:show, :withdraw]
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
 
   def new
     @article = Article.new
@@ -23,7 +24,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
+    authorize @article
     @user = current_user
     @article_user = User.find(@article.user_id)
     @bids = @article.bids.order(bid_price: :desc)
@@ -33,12 +34,12 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
+    authorize @article
     fetch_pokemons
   end
 
   def update
-    @article = Article.find(params[:id])
+    authorize @article
     if (@article.start_date.strftime('%d/%m/%Y %H:%M') < (DateTime.now.strftime('%d/%m/%Y %H:%M')))
       redirect_to article_path(@article)
       flash[:danger] =  t('article.cant_update_on_going')
@@ -51,7 +52,7 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article = Article.find(params[:id])
+    authorize @article
     if (@article.start_date.strftime('%d/%m/%Y %H:%M') < (DateTime.now.strftime('%d/%m/%Y %H:%M')))
       flash[:danger] = t('article.cant_delete_on_going')
       redirect_to article_path(@article)
