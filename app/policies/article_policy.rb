@@ -33,9 +33,8 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.admin? ||  article.user == user
+    user.admin? || article.user == user
   end
-
 
   class Scope < ApplicationPolicy::Scope
     def resolve

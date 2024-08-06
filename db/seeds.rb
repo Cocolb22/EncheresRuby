@@ -8,9 +8,11 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-User.create!(id: 1, email: 'coco@test.com', password: 'password', first_name: 'Coco', last_name: 'LB', pseudo: 'Coco', credit: 1000)
+User.create!(id: 1, email: 'coco@test.com', password: 'password', first_name: 'Coco', last_name: 'LB', pseudo: 'Coco',
+             credit: 1000)
 
-User.create!(id: 2, email: 'erle@test.com', password: 'password1', first_name: 'Erle', last_name: 'LB', pseudo: 'Erle', credit: 2000)
+User.create!(id: 2, email: 'erle@test.com', password: 'password1', first_name: 'Erle', last_name: 'LB', pseudo: 'Erle',
+             credit: 2000)
 
 Article.create!(name: 'Pikachu', description: 'une souris jaune', start_date: DateTime.now + 1, end_date:  DateTime.now + 6,
                 user_id: 1, first_price: 100, category: 'Electrik')
