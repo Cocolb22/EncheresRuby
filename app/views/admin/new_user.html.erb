@@ -1,0 +1,73 @@
+<body>
+  <%= link_to admin_path, class: "nav-link" do %>
+    <div class="d-flex flex-row align-items-center m-3">
+      <img src="/assets/arrow-bar-left.svg" alt="arrow-bar-left">
+      <span class="ml-2"><%= t("globals.return") %></span>
+    </div>
+  <% end %>
+
+  <div class="container col-md-8 mt-4 shadow-box border p-3 rounded">
+    <h1><%= t("globals.user_form.create_user") %></h1>
+
+    <%= form_for @user, url: admin_users_path do |f| %>
+      <div class="form-group mb-3">
+        <%= f.label t("globals.user_form.first_name"), class: 'form-label' %>
+        <%= f.text_field :first_name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label t("globals.user_form.last_name"), class: 'form-label' %>
+        <%= f.text_field :last_name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label t("globals.user_form.pseudo"), class: 'form-label' %>
+        <%= f.text_field :pseudo, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label t("globals.user_form.email"), class: 'form-label' %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label t("globals.user_form.phone"), class: 'form-label' %>
+        <%= f.text_field :phone, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label t("globals.user_form.street"), class: 'form-label' %>
+        <%= f.text_field :street, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label t("globals.user_form.zip_code"), class: 'form-label' %>
+        <%= f.text_field :zip_code, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label t("globals.user_form.city"), class: 'form-label' %>
+        <%= f.text_field :city, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label t("globals.user_form.role"), class: 'form-label' %>
+        <%= f.select :role, [['User', 'user'], ['Admin', 'admin']], {}, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label t("globals.user_form.password"), class: 'form-label' %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label t("globals.user_form.password_confirmation"), class: 'form-label' %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <%= f.submit 'Create User', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</body>

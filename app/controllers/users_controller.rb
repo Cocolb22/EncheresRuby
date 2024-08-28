@@ -3,7 +3,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  before_action :authorize_user, only: [:show, :edit, :update]
+  before_action :authorize_user, only: %i[show edit update]
 
   def show
     @user = current_user
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     @user = current_user
     if @user.update(user_params)
       redirect_to user_path(@user)
-      flash[:message] = 'Votre profil a bien été modifié'
+      flash[:success] = 'Votre profil a bien été modifié'
     else
       render :edit
     end

@@ -5,5 +5,7 @@ class PagesController < ApplicationController
   def home
     @articles = Article.all
     @current_user_id = current_user&.id
+
+    @articles = Article.order(:name).page(params[:article_page]).per(9)
   end
 end

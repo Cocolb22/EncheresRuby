@@ -9,6 +9,8 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :pseudo, presence: true
   validates :pseudo, :email, uniqueness: true
 
+  has_many :articles, dependent: :destroy
+
   ROLES = %w[admin user].freeze
 
   validates :role, inclusion: { in: ROLES }

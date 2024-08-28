@@ -1,0 +1,6 @@
+fr:
+  user:
+    created: "Utilisateur créé"
+    deleted: "Utilisateur supprimé"
+    create_user: "Créer un utilisateur"
+    show_users: "Voir les utilisateurs"

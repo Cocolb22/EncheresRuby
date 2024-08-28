@@ -1,6 +1,12 @@
 fr:
   globals:
     return: "Retour"
+    manage_article: "Gestion des articles"
+    manage_user: "Gestion des utilisateurs"
+    name: "Nom"
+    actions: "Actions"
+    show: "Detail"
+    delete: "Supprimer"
     home_page:
       home: "Accueil"
       title: "PokéEnchères"
@@ -40,6 +46,7 @@ fr:
       not_start: "Non commencé"
       ended: "Vente terminée"
     user_form:
+      create_user: "Créer un utilisateur"
       my_profile: "Mon profil"
       first_name: "Prénom"
       last_name: "Nom"
@@ -51,5 +58,13 @@ fr:
       zip_code: "Code postal"
       credit: "Crédit"
       update: "Mettre à jour"
-    
-
+      role: "Role"
+      password: "Mot de passe"
+      password_confirmation: "Confirmer le mot de passe"
+  views:
+    pagination:
+      first: "&laquo; Première"
+      last: "Dernière &raquo;"
+      previous: "&lsaquo; Précédente"
+      next: "Suivante &rsaquo;"
+      truncate: "&hellip;"

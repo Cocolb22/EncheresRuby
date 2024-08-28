@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Article < ApplicationRecord
   belongs_to :user
   has_many :bids, dependent: :destroy
@@ -10,7 +12,7 @@ class Article < ApplicationRecord
   validate :date_fin_cannot_be_before_date_debut
 
   def get_highest_bid
-    if bids.count == 0
+    if bids.count.zero?
       first_price
     else
       bids.order(bid_price: :desc).first.bid_price
@@ -36,7 +38,7 @@ class Article < ApplicationRecord
   end
 
   def get_winner
-    unless end_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') && bids.count > 0
+    unless end_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') && bids.count.positive?
       return I18n.t('article.zero_winner')
     end
 
@@ -49,7 +51,7 @@ class Article < ApplicationRecord
   def credit_enchere_creator(winning_bid)
     return if paid
 
-    return unless end_date < DateTime.now && bids.count > 0
+    return unless end_date < DateTime.now && bids.count.positive?
 
     creator = user
     creator.update(credit: creator.credit + winning_bid.bid_price)

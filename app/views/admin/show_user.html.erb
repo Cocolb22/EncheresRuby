@@ -1,0 +1,70 @@
+<body>
+  <%= link_to admin_path, class: "nav-link" do %>
+    <div class="d-flex flex-row align-items-center m-3">
+      <img src="/assets/arrow-bar-left.svg" alt="arrow-bar-left">
+      <span class="ml-2"><%= t("globals.return") %></span>
+    </div>
+  <% end %>
+
+  <div class="container col-md-6 mt-4 shadow-box border p-3 rounded">
+  <h3><%= t('globals.user_details') %></h3>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th><%= t('globals.user_form.first_name') %></th>
+            <td><%= @user.first_name %></td>
+          </tr>
+          <tr>
+            <th><%= t('globals.user_form.last_name') %></th>
+            <td><%= @user.last_name %></td>
+          </tr>
+          <tr>
+            <th><%= t('globals.user_form.pseudo') %></th>
+            <td><%= @user.pseudo %></td>
+          </tr>
+          <tr>
+            <th><%= t('globals.user_form.email') %></th>
+            <td><%= @user.email %></td>
+          </tr>
+          <tr>
+            <th><%= t('globals.user_form.phone') %></th>
+            <td><%= @user.phone %></td>
+          </tr>
+          <tr>
+            <th><%= t('globals.user_form.street') %></th>
+            <td><%= @user.street %></td>
+          </tr>
+          <tr>
+            <th><%= t('globals.user_form.zip_code') %></th>
+            <td><%= @user.zip_code %></td>
+          </tr>
+          <tr>
+            <th><%= t('globals.user_form.city') %></th>
+            <td><%= @user.city %></td>
+          </tr>
+          <tr>
+            <th><%= t('globals.user_form.role') %></th>
+            <td><%= @user.role %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="container col-md-4 mt-4 pb-3">
+    <ul class="d-flex justify-content-center">
+      <% if user_signed_in? %>
+        <li class="nav-item m-2">
+          <%= form_with(model: @user, method: :delete, url: destroy_admin_user_path(@user), data: { turbo_confirm: "Are you sure?" }) do |form| %>
+            <%= form.button t("globals.show_page.delete"), class: "btn btn-danger btn-sm", type: :submit %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+</body>

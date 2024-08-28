@@ -1,6 +1,12 @@
 en:
   globals:
     return: "Return"
+    manage_article: "Manage Articles "
+    manage_user: "Manage Users"
+    name: "Name"
+    actions: "Actions"
+    show: "Show"
+    delete: "Delete"
     home_page:
       home: "Home"
       title: "PokéAuctions"
@@ -9,6 +15,7 @@ en:
       poke_price: "First Price"
       poke_start_date: "Start Date"
       create_article: "Create Article"
+    admin_page: "Admin Page"
     filter:
       on_going: "On going"
       not_start: "Not started"
@@ -38,6 +45,7 @@ en:
       not_start: "Not started"
       ended: "Auction ended"
     user_form:
+      create_user: "Create User"
       my_profile: "My Profile"
       first_name: "First Name"
       last_name: "Last Name"
@@ -49,4 +57,6 @@ en:
       zip_code: "Zip Code"
       credit: "Credit"
       update: "Update"
-
+      role: "Role"
+      password: "Password"
+      password_confirmation: "Password confirmation"
