@@ -8,6 +8,7 @@ en:
     updated: "Your article has been updated."
     deleted: "Your article has been deleted."
     withdraw_link: "Get your Pokémon"
+    cant_withdraw: "You are not allowed to access this page"
     withdraw:
       title: "Withdrawal"
       congrats: "Congratulations, you have won the auction for "
@@ -16,3 +17,4 @@ en:
       city: "City"
       postal_code: "Postal Code"
       return_link: "Back to the article"
+    show_articles: "Show articles"

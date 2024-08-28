@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserPolicy < ApplicationPolicy
   # Autorise les utilisateurs à voir et modifier leur propre profil
   def show?

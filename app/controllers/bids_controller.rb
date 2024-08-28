@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class BidsController < ApplicationController
   def create
     @bid = Bid.new(bid_params)
     @article = Article.find(params[:article_id])
 
-    if @article.user_id == current_user.id && @article.bids.count == 0
+    if @article.user_id == current_user.id && @article.bids.count.zero?
       flash[:danger] = t('bid.cant_be_first_bidder')
       redirect_to article_path(@article)
       return
@@ -43,11 +45,10 @@ class BidsController < ApplicationController
         flash[:success] = t('bid.created')
       end
 
-      redirect_to article_path(@article)
     else
       flash[:danger] = t('bid.article_not_active')
-      redirect_to article_path(@article)
     end
+    redirect_to article_path(@article)
   end
 
   private

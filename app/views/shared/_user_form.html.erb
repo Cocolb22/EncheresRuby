@@ -1,14 +1,16 @@
 <body>
+  <div>
+    <%= link_to root_path, class: "nav-link" do %>
+      <div class="d-flex flex-row align-items-center m-3">
+        <img src="/assets/arrow-bar-left.svg" alt="arrow-bar-left">
+        <span class="ml-2"><%= t("globals.return") %></span>
+      </div>
+    <% end %>
+     <%= link_to t("devise.connexion.update_profile"), edit_user_registration_path, class: "nav-link m-3"%>
+  </div>
 
-  <%= link_to root_path, class: "nav-link" do %>
-    <div class="d-flex flex-row align-items-center m-3">
-      <img src="/assets/arrow-bar-left.svg" alt="arrow-bar-left">
-      <span class="ml-2"><%= t("globals.return") %></span>
-    </div>
-  <% end %>
-  
   <div class="container col-md-4 mt-4 shadow-box border p-3 rounded">
-    
+
     <%= simple_form_for @user do |f| %>
       <%= f.input :pseudo, label:  t("globals.user_form.pseudo") %>
       <%= f.input :first_name, label:  t("globals.user_form.first_name") %>

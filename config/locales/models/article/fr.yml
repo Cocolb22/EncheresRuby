@@ -8,6 +8,7 @@ fr:
     updated: "Votre article a été mis à jour."
     deleted: "Votre article a été supprimé."
     withdraw_link: "Récupérer votre Pokémon"
+    cant_withdraw: "Vous ne pouvez pas accéder à cet page"
     withdraw:
       title: "Retrait"
       congrats: "Félicitations, vous avez gagné l'enchère pour "
@@ -16,3 +17,4 @@ fr:
       city: "Ville"
       postal_code: "Code Postal"
       return_link: "Retour à l'article"
+    show_articles: "Voir les articles"

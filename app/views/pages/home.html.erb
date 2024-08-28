@@ -80,6 +80,9 @@
       <% end %>
     </div>
   </div>
+  <div>
+      <%= paginate @articles, param_name: 'article_page' %>
+  </div>
 </body>
 
 <%= javascript_include_tag 'filters' %>

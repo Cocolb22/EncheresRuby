@@ -3,11 +3,15 @@ fr:
     connexion:
       email: "Email"
       password: "Mot de passe"
+      new_password: "Nouveau mot de passe"
+      new_password_confirmation: "Confirmer le nouveau mot de passe"
       password_confirmation: " Confirmation du mot de passe"
       login: "Se connecter"
       sign_up: "S'inscrire"
       min_characters: "caractères minimum"
       log_out: "Déconnexion"
+      edit_user: "Mettre à jour "
+      update_profile: "Mettre à jour les informations du compte"
     confirmations:
       confirmed: "Votre adresse e-mail a été confirmée avec succès."
       send_instructions: "Vous recevrez un e-mail avec des instructions pour confirmer votre adresse e-mail dans quelques minutes."
@@ -42,8 +46,12 @@ fr:
       send_paranoid_instructions: "Si votre adresse e-mail existe dans notre base de données, vous recevrez un lien de récupération de mot de passe à votre adresse e-mail dans quelques minutes."
       updated: "Votre mot de passe a été changé avec succès. Vous êtes maintenant connecté."
       updated_not_active: "Votre mot de passe a été changé avec succès."
+      password_forgot: "Mot de passe oublié ?"
+      leave_blank: "Ne pas compléter si vous ne voulez pas changer votre mot de passe"
+      confirm_password_hint: "Confirmer votre nouveau mot de passe"
     registrations:
       sign_up: "Créer un compte"
+      update: "Mettre à jour"
       destroyed: "Adieu ! Votre compte a été annulé avec succès. Nous espérons vous revoir bientôt."
       signed_up: "Bienvenue ! Vous vous êtes inscrit avec succès."
       signed_up_but_inactive: "Vous vous êtes inscrit avec succès. Cependant, nous n'avons pas pu vous connecter car votre compte n'est pas encore activé."
@@ -52,11 +60,13 @@ fr:
       update_needs_confirmation: "Vous avez mis à jour votre compte avec succès, mais nous devons vérifier votre nouvelle adresse e-mail. Veuillez vérifier votre e-mail et suivre le lien de confirmation pour confirmer votre nouvelle adresse e-mail."
       updated: "Votre compte a été mis à jour avec succès."
       updated_but_not_signed_in: "Votre compte a été mis à jour avec succès, mais comme votre mot de passe a été modifié, vous devez vous connecter à nouveau."
+      cancel_account: "Supprimer mon compte"
     sessions:
       signed_in: "Connecté avec succès."
       signed_out: "Déconnecté avec succès."
       already_signed_out: "Déconnecté avec succès."
       sign_in: "Se connecter"
+      remember_me: "Se souvenir de moi"
     unlocks:
       send_instructions: "Vous recevrez un e-mail avec des instructions sur la façon de déverrouiller votre compte dans quelques minutes."
       send_paranoid_instructions: "Si votre compte existe, vous recevrez un e-mail avec des instructions sur la façon de le déverrouiller dans quelques minutes."

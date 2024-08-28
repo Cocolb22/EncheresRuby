@@ -1,0 +1,6 @@
+en:
+  user:
+    deleted: "User deleted"
+    created: "user created"
+    create_user: "Create user"
+    show_users: "Show users"

@@ -1,0 +1,75 @@
+<div class="container mt-5">
+  <h2><%= t("globals.admin_page") %></h2>
+
+  <div class="mb-3 d-flex justify-content-end">
+    <%= link_to t("user.create_user"), new_admin_user_path, class: 'btn btn-primary' %>
+  </div>
+
+  <h3><%= t("globals.manage_user") %></h3>
+  <button class="btn btn-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#userTable" aria-expanded="false" aria-controls="userTable">
+    <%= t("user.show_users") %>
+  </button>
+
+  <div id="userTable">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="col-6"><%= t("globals.name") %></th>
+          <th class="col-6"><%= t("globals.actions") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td class="col-6"><%= user.first_name %></td>
+            <td class="col-6">
+              <div class="d-flex">
+                <%= link_to t("globals.show"), admin_user_path(user), class: 'btn btn-info btn-sm me-2' %>
+                <%= form_with(model: user, method: :delete, url: destroy_admin_user_path(user), data: { turbo_confirm: "Are you sure you want to delete this user?" }) do |form| %>
+                  <%= form.button t("globals.delete"), class: "btn btn-danger btn-sm", type: :submit %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div>
+      <%= paginate @users, param_name: 'user_page' %>
+    </div>
+  </div>
+
+  <h3><%= t("globals.manage_article") %></h3>
+  <button class="btn btn-secondary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#articleTable" aria-expanded="false" aria-controls="articleTable">
+   <%= t("article.show_articles") %>
+  </button>
+
+  <div id="articleTable">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="col-6"><%= t("globals.name") %></th>
+          <th class="col-6"><%= t("globals.actions") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @articles.each do |article| %>
+          <tr>
+            <td class="col-6"> <%= article.name %></td>
+             <td class="col-6">
+              <div class="d-flex">
+                <%= link_to t("globals.show"), admin_article_path(article), class: 'btn btn-info btn-sm me-2' %>
+                <%= form_with(model: article, method: :delete, url: destroy_admin_article_path(article), data: { turbo_confirm: "Are you sure?" }) do |form| %>
+                  <%= form.button t("globals.delete"), class: "btn btn-danger btn-sm", type: :submit %>
+                <% end %>
+            <div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <div>
+     <%= paginate @articles, param_name: 'article_page' %>
+    </div>
+  </div>
+</div>

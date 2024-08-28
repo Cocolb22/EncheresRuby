@@ -66,7 +66,8 @@ class ArticlesController < ApplicationController
     @winner = @article.get_winner
     return unless @winner.is_a?(User) && @winner.id != current_user.id
 
-    redirect_to article_path(@article), alert: 'Vous n\'êtes pas autorisé à accéder à cette page.'
+    redirect_to article_path(@article)
+    flash[:danger] = t('article.cant_withdraw')
   end
 
   private

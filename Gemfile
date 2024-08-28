@@ -58,6 +58,9 @@ gem 'pry'
 gem 'pry-byebug'
 gem 'pry-rails'
 
+# Kaminari
+gem 'kaminari'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

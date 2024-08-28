@@ -1,0 +1,58 @@
+<body>
+
+  <%= link_to admin_path, class: "nav-link" do %>
+    <div class="d-flex flex-row align-items-center m-3">
+      <img src="/assets/arrow-bar-left.svg" alt="arrow-bar-left">
+      <span class="ml-2"><%= t("globals.return") %></span>
+    </div>
+  <% end %>
+
+  <div class="container col-md-6 mt-4 shadow-box border p-3 rounded">
+    <h3><%= t('globals.article_form.on_going') %></h3>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th><%= t('globals.article_form.poke_name') %></th>
+              <td><%=@article.name %></td>
+            </tr>
+            <tr>
+              <th><%= t('globals.article_form.description') %></th>
+              <td><%=@article.description %></td>
+            </tr>
+            <tr>
+              <th><%= t('globals.article_form.first_price') %></th>
+              <td><%=@article.first_price %></td>
+            </tr>
+            <tr>
+              <th><%= t('globals.article_form.start_date') %></th>
+              <td><%= @article.start_date.strftime('%d/%m/%Y %H:%M') %></td>
+            </tr>
+            <tr>
+              <th><%= t('globals.article_form.end_date') %></th>
+              <td><%= @article.end_date.strftime('%d/%m/%Y %H:%M') %></td>
+            </tr>
+            <tr>
+              <th><%= t('globals.article_form.actual_amount') %></th>
+              <td><%=@article.bids.any? ? @highest_bid : @article.first_price %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+     <div class="container col-md-4 mt-4 pb-3">
+      <ul class="d-flex justify-content-center">
+        <% if user_signed_in? %>
+            <li class="nav-item m-2">
+            <%= form_with(model: @article, method: :delete, url: destroy_admin_article_path(@article), data: { turbo_confirm: "Are you sure?" }) do |form| %>
+              <%= form.button t("globals.show_page.delete"), class: "btn btn-danger btn-sm", type: :submit%>
+              <% end %>
+            </li>
+        <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
