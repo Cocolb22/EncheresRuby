@@ -1,11 +1,18 @@
 <body>
+   <div class="d-flex justify-content-between align-items-start mt-4 mr-4">
+      <%= link_to root_path, class: "nav-link" do %>
+        <div class="d-flex flex-row align-items-center m-3">
+          <img src="/assets/arrow-bar-left.svg" alt="arrow-bar-left">
+          <span class="ml-2"><%= t("globals.return") %></span>
+        </div>
+      <% end %>
 
-  <%= link_to root_path, class: "nav-link" do %>
-    <div class="d-flex flex-row align-items-center m-3">
-      <img src="/assets/arrow-bar-left.svg" alt="arrow-bar-left">
-      <span class="ml-2"><%= t("globals.return") %></span>
+      <div class="d-flex align-items-center mr-3">
+          <% if @article.image.attached? %>
+            <%= image_tag @article.image, size: "150x150", class: "img-thumbnail rounded-circle mr-4" %>
+          <% end %>
+      </div>
     </div>
-  <% end %>
 
   <div class="container col-md-8 mt-4 pb-3 d-flex-column justify-content-center">
     <h3><%= t('globals.article_form.on_going') %></h3>

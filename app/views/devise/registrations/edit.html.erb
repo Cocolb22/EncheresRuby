@@ -42,6 +42,7 @@
 
         <div class="form-group mb-3">
           <%= f.input :current_password,
+                      label: t("devise.connexion.current_password"),
                       required: true,
                       input_html: { autocomplete: "current-password", class: 'form-control' } %>
         </div>
@@ -70,4 +71,3 @@
     </div>
   </div>
 </body>
-

@@ -11,6 +11,7 @@ class User < ApplicationRecord
   validates :phone, numericality: { only_integer: true }, allow_blank: true, length: { is: 10 }
 
   has_many :articles, dependent: :destroy
+  has_one_attached :avatar
 
   ROLES = %w[admin user].freeze
 

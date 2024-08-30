@@ -1,63 +1,59 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+require 'open-uri'
+require 'httparty'
 
-User.create!(id: 1, email: 'coco@test.com', password: 'password', first_name: 'Coco', last_name: 'LB', pseudo: 'Coco',
-             credit: 1000, role: 'admin')
+# Helper pour récupérer les images des Pokémon
+module PokemonHelper
+  def self.fetch_all_pokemons
+    response = HTTParty.get('https://tyradex.vercel.app/api/v1/pokemon', query: { limit: 151, offset: 1 })
+    JSON.parse(response.body).reject { |pokemon| pokemon['pokedex_id'].zero? }
+  end
 
-User.create!(id: 2, email: 'erle@test.com', password: 'password1', first_name: 'Erle', last_name: 'LB', pseudo: 'Erle',
-             credit: 2000)
+  def self.fetch_pokemon_image(pokemon_name)
+    pokemons = fetch_all_pokemons
+    pokemon = pokemons.find { |p| p['name']['fr'].downcase == pokemon_name.downcase }
+    pokemon ? pokemon['sprites']['regular'] : nil
+  end
+end
 
-Article.create!(name: 'Pikachu', description: 'une souris jaune', start_date: DateTime.now + 1, end_date:  DateTime.now + 6,
-                user_id: 1, first_price: 100, category: 'Electrik')
+# Nettoyer les articles existants
+Article.destroy_all
 
-Article.create!(name: 'Dracaufeu', description: "l'ultime pokémon feu", start_date: DateTime.now + 1, end_date: DateTime.now + 2,
-                user_id: 1, first_price: 100, category: 'Feu')
+# Créer des articles avec images des Pokémon
+pokemon_names = %w[
+  Pikachu Dracaufeu Carapuce Bulbizarre Salamèche
+  Rattata Evoli Ronflex Mewtwo Dracolosse
+  Lokhlass Onix Magicarpe Alakazam Nidoking Gengar
+]
 
-Article.create!(name: 'Carapuce', description: 'une tortue bleue', start_date: DateTime.now + 1, end_date: DateTime.now + 5,
-                user_id: 2, first_price: 100, category: 'Eau')
+pokemon_names.each do |pokemon_name|
+  # Créer un article
+  article = Article.new(
+    name: pokemon_name,
+    description: "Description pour le Pokémon #{pokemon_name}",
+    start_date: DateTime.now + 1,
+    end_date: DateTime.now + 6,
+    user_id: User.pluck(:id).sample, # Assigner aléatoirement un utilisateur
+    first_price: rand(50..1000),
+    category: 'Pokémon'
+  )
 
-Article.create!(name: 'Bulbizarre', description: 'une plante verte', start_date: DateTime.now + 1, end_date: DateTime.now + 4,
-                user_id: 2, first_price: 100, category: 'Plante')
+  # Associer l'image du Pokémon à l'article
+  pokemon_image_url = PokemonHelper.fetch_pokemon_image(pokemon_name)
+  if pokemon_image_url
+    begin
+      image = URI.open(pokemon_image_url)
+      article.image.attach(io: image, filename: "#{pokemon_name.downcase}.png", content_type: 'image/png')
+    rescue OpenURI::HTTPError => e
+      Rails.logger.warn "Failed to download image for Pokémon: #{pokemon_name}. Error: #{e.message}"
+    end
+  else
+    Rails.logger.warn "Image not found for Pokémon: #{pokemon_name}"
+  end
 
-Article.create!(name: 'Salamèche', description: 'un lézard rouge', start_date: DateTime.now + 1, end_date: DateTime.now + 8,
-                user_id: 2, first_price: 100, category: 'Feu')
+  # Sauvegarder l'article
+  article.save
+end
 
-Article.create!(name: 'Rattata', description: 'un rat violet', start_date: DateTime.now + 1, end_date: DateTime.now + 6,
-                user_id: 1, first_price: 100, category: 'Normal')
-
-Article.create!(name: 'Evoli', description: 'un pokémon aux nombreuses évolutions', start_date: DateTime.now + 1, end_date: DateTime.now + 7,
-                user_id: 1, first_price: 100, category: 'Normal')
-
-Article.create!(name: 'Ronflex', description: 'un énorme pokémon qui dort beaucoup', start_date: DateTime.now + 1, end_date: DateTime.now + 3,
-                user_id: 2, first_price: 100, category: 'Normal')
-
-Article.create!(name: 'Mewtwo', description: 'un pokémon légendaire', start_date: DateTime.now + 1, end_date: DateTime.now + 10,
-                user_id: 1, first_price: 1000, category: 'Psy')
-
-Article.create!(name: 'Dracolosse', description: 'un dragon puissant', start_date: DateTime.now + 1, end_date: DateTime.now + 5,
-                user_id: 2, first_price: 1000, category: 'Dragon')
-
-Article.create!(name: 'Lokhlass', description: 'un pokémon aquatique et glace', start_date: DateTime.now + 1, end_date: DateTime.now + 7,
-                user_id: 1, first_price: 800, category: 'Eau/Glace')
-
-Article.create!(name: 'Onix', description: 'un serpent de roche géant', start_date: DateTime.now + 1, end_date: DateTime.now + 6,
-                user_id: 2, first_price: 500, category: 'Roche')
-
-Article.create!(name: 'Magicarpe', description: 'un poisson rouge très faible', start_date: DateTime.now + 1, end_date: DateTime.now + 4,
-                user_id: 1, first_price: 50, category: 'Eau')
-
-Article.create!(name: 'Alakazam', description: 'un puissant pokémon psy', start_date: DateTime.now + 1, end_date: DateTime.now + 5,
-                user_id: 2, first_price: 900, category: 'Psy')
-
-Article.create!(name: 'Nidoking', description: 'un pokémon à la force colossale', start_date: DateTime.now + 1, end_date: DateTime.now + 7,
-                user_id: 1, first_price: 700, category: 'Poison/Sol')
-
-Article.create!(name: 'Gengar', description: 'un pokémon fantomatique', start_date: DateTime.now + 1, end_date: DateTime.now + 8,
-                user_id: 2, first_price: 900, category: 'Spectre/Poison')
+puts 'Seed data created successfully!'
