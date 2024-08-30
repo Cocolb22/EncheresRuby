@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
       flash[:success] = 'Votre profil a bien été modifié'
     else
-      render :edit
+      render :show
     end
   end
 

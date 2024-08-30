@@ -16,7 +16,7 @@
       <%= f.input :first_name, label:  t("globals.user_form.first_name") %>
       <%= f.input :last_name, label:  t("globals.user_form.last_name") %>
       <%= f.input :email, label:  t("globals.user_form.email") %>
-      <%= f.input :phone, label:  t("globals.user_form.phone")%>
+      <%= f.input :phone, label: t("globals.user_form.phone"), input_html: { pattern: '\d*', title: 'Veuillez entrer un numéro de téléphone valide' } %>
       <%= f.input :street, label:  t("globals.user_form.street") %>
       <%= f.input :zip_code, label:  t("globals.user_form.zip_code") %>
       <%= f.input :city, label:  t("globals.user_form.city") %>
