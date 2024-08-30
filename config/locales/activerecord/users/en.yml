@@ -18,6 +18,8 @@ en:
               blank: "The email can't be blank"
             password:
               blank: "The password can't be blank"
+            phone:
+              wrong_length: "Length doesn't match phone number format"
         article:
           attributes:
             title:

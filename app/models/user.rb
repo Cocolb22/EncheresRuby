@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :pseudo, presence: true
   validates :pseudo, :email, uniqueness: true
+  validates :phone, numericality: { only_integer: true }, allow_blank: true, length: { is: 10 }
 
   has_many :articles, dependent: :destroy
 
