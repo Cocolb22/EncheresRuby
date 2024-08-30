@@ -8,6 +8,7 @@ en:
       new_password: "New password"
       password_confirmation: "Password confirmation"
       new_password_confirmation: "Confirm new password"
+      current_password: "Current password"
       login: "Log in"
       sign_up: "Create an account"
       min_characters: "minimum characters"

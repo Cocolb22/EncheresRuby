@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require 'open-uri'
+require 'uri'
+
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[show edit update destroy]
   before_action :authenticate_user!, only: %i[create edit update destroy]
+  before_action :fetch_pokemons, only: %i[new edit]
 
   def new
     @article = Article.new
@@ -11,6 +15,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(article_params)
+    attach_pokemon_image(@article)
     @article.user = current_user
     @article.status = 'Créée'
     if @article.save
@@ -102,13 +107,9 @@ class ArticlesController < ApplicationController
   end
 
   def fetch_pokemons
-    response = HTTParty.get('https://tyradex.vercel.app/api/v1/pokemon', query: { limit: 151, offset: 1 })
-    @pokemons = JSON.parse(response.body)
-
+    @pokemons = PokemonHelper.fetch_all_pokemons
     @pokemons_names = @pokemons.map { |pokemon| pokemon['name']['fr'] }
     @first_gen_pokemons_names = @pokemons_names[1..151]
-
-    @first_gen_pokemons = []
     @first_gen_pokemons = @pokemons.select { |pokemon| pokemon['generation'] == 1 }
     @first_gen_pokemons_category = @first_gen_pokemons.flat_map do |pokemon|
       if pokemon['types'].is_a?(Array)
@@ -117,5 +118,16 @@ class ArticlesController < ApplicationController
         []
       end
     end.uniq
+  end
+
+  def attach_pokemon_image(article)
+    pokemon_image_url = PokemonHelper.fetch_pokemon_image(article.name)
+
+    if pokemon_image_url
+      image = URI.open(pokemon_image_url)
+      article.image.attach(io: image, filename: "#{article.name.downcase}.png", content_type: 'image/png')
+    else
+      Rails.logger.warn "Image not found for Pokémon: #{article.name}"
+    end
   end
 end

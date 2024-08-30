@@ -62,7 +62,9 @@
             <%= link_to article_path(article), class: "nav-link" do %>
               <div class="row g-0">
                 <div class="col-md-6">
-                  <%= image_tag "marteau.jpeg", class: "img-fluid p-2" %>
+                  <% if article.image.attached? %>
+                    <%= image_tag article.image, class: "img-fluid p-2" %>
+                  <% end %>
                 </div>
                 <div class="col-md-6" style="height: 175px">
                   <div class="h-50 pt-3">

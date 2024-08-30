@@ -6,6 +6,7 @@ fr:
       new_password: "Nouveau mot de passe"
       new_password_confirmation: "Confirmer le nouveau mot de passe"
       password_confirmation: " Confirmation du mot de passe"
+      current_password: "Mot de passe actuel"
       login: "Se connecter"
       sign_up: "S'inscrire"
       min_characters: "caractères minimum"
