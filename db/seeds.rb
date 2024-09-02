@@ -3,10 +3,9 @@
 require 'open-uri'
 require 'httparty'
 
-# Helper pour récupérer les images des Pokémon
-module PokemonHelper
+module PokemonsHelper
   def self.fetch_all_pokemons
-    response = HTTParty.get('https://tyradex.vercel.app/api/v1/pokemon', query: { limit: 151, offset: 1 })
+    response = HTTParty.get('https://tyradex.vercel.app/api/v1/pokemon', query: { limit: 150, offset: 0 })
     JSON.parse(response.body).reject { |pokemon| pokemon['pokedex_id'].zero? }
   end
 
@@ -17,30 +16,27 @@ module PokemonHelper
   end
 end
 
-# Nettoyer les articles existants
 Article.destroy_all
 
-# Créer des articles avec images des Pokémon
 pokemon_names = %w[
   Pikachu Dracaufeu Carapuce Bulbizarre Salamèche
-  Rattata Evoli Ronflex Mewtwo Dracolosse
-  Lokhlass Onix Magicarpe Alakazam Nidoking Gengar
+  Rattata Évoli Ronflex Mewtwo Dracolosse
+  Lokhlass Onix Magicarpe Alakazam Nidoking Ectoplasma
 ]
 
 pokemon_names.each do |pokemon_name|
-  # Créer un article
   article = Article.new(
     name: pokemon_name,
     description: "Description pour le Pokémon #{pokemon_name}",
     start_date: DateTime.now + 1,
     end_date: DateTime.now + 6,
-    user_id: User.pluck(:id).sample, # Assigner aléatoirement un utilisateur
+    user_id: User.pluck(:id).sample,
     first_price: rand(50..1000),
-    category: 'Pokémon'
+    category: 'Pokémon',
+    status: 'Créée'
   )
 
-  # Associer l'image du Pokémon à l'article
-  pokemon_image_url = PokemonHelper.fetch_pokemon_image(pokemon_name)
+  pokemon_image_url = PokemonsHelper.fetch_pokemon_image(pokemon_name)
   if pokemon_image_url
     begin
       image = URI.open(pokemon_image_url)
@@ -52,7 +48,6 @@ pokemon_names.each do |pokemon_name|
     Rails.logger.warn "Image not found for Pokémon: #{pokemon_name}"
   end
 
-  # Sauvegarder l'article
   article.save
 end
 

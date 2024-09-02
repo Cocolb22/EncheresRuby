@@ -85,31 +85,10 @@ class ArticlesController < ApplicationController
     params.require(:article).permit(:name, :description, :first_price, :start_date, :end_date, :category)
   end
 
-  def open_auction
-    @articles = Article.all
-    @articles.each do |article|
-      next unless article.start_date < DateTime.now
-
-      article.status.update('En cours')
-      @article.save
-      redirect_to article_path(@article)
-    end
-  end
-
-  def close_auction
-    @articles = Article.all
-    @articles.each do |article|
-      if article.end_date < DateTime.now
-        article.status.update('Fermée')
-        article.save
-      end
-    end
-  end
-
   def fetch_pokemons
-    @pokemons = PokemonHelper.fetch_all_pokemons
+    @pokemons = PokemonsHelper.fetch_all_pokemons
     @pokemons_names = @pokemons.map { |pokemon| pokemon['name']['fr'] }
-    @first_gen_pokemons_names = @pokemons_names[1..151]
+    @first_gen_pokemons_names = @pokemons_names[0..150]
     @first_gen_pokemons = @pokemons.select { |pokemon| pokemon['generation'] == 1 }
     @first_gen_pokemons_category = @first_gen_pokemons.flat_map do |pokemon|
       if pokemon['types'].is_a?(Array)
@@ -121,7 +100,7 @@ class ArticlesController < ApplicationController
   end
 
   def attach_pokemon_image(article)
-    pokemon_image_url = PokemonHelper.fetch_pokemon_image(article.name)
+    pokemon_image_url = PokemonsHelper.fetch_pokemon_image(article.name)
 
     if pokemon_image_url
       image = URI.open(pokemon_image_url)

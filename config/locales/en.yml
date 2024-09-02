@@ -14,6 +14,7 @@ en:
       poke_description: "Description"
       poke_price: "First Price"
       poke_start_date: "Start Date"
+      poke_end_date: "End Date"
       create_article: "Create Article"
     admin_page: "Admin Page"
     filter:

@@ -21,5 +21,13 @@ module EncheresRuby
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Configure default time formats
+    config.time_zone = 'Europe/Paris' # Assure-toi que tout est en fuseau horaire local
+    config.active_record.default_timezone = :local
+
+    # Configure custom date and time formats
+    Time::DATE_FORMATS[:default] = '%d/%m/%Y %H:%M'
+    Date::DATE_FORMATS[:default] = '%d/%m/%Y'
   end
 end

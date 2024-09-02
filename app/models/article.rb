@@ -57,4 +57,20 @@ class Article < ApplicationRecord
     creator.update(credit: creator.credit + winning_bid.bid_price)
     update(paid: true)
   end
+
+  def self.update_statuses
+    Article.all.each do |article|
+      start_date_as_datetime = article.start_date.to_datetime
+      time_now = DateTime.now
+
+      puts "Start date (as DateTime): #{start_date_as_datetime}"
+      puts "Time now: #{time_now}"
+      puts "Start date class: #{start_date_as_datetime.class}"
+      puts "Time now class: #{time_now.class}"
+      puts "Comparison result: #{start_date_as_datetime < time_now}"
+      puts "Article status: #{article.status}"
+    end
+  end
+
+
 end

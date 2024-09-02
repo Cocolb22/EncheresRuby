@@ -7,9 +7,8 @@ class PokemonsController < ApplicationController
 
   def index
     @pokemons_names = @pokemons.map { |pokemon| pokemon['name']['fr'] }
-    @first_gen_pokemons_names = @pokemons_names[1..151]
-
     @first_gen_pokemons = @pokemons.select { |pokemon| pokemon['generation'] == 1 }
+    @first_gen_pokemons_names = @first_gen_pokemons.map { |pokemon| pokemon['name']['fr'] }
   end
 
   def get_pokemon_image(pokemon_name)
@@ -20,7 +19,10 @@ class PokemonsController < ApplicationController
   private
 
   def fetch_pokemons
-    response = HTTParty.get('https://tyradex.vercel.app/api/v1/pokemon', query: { limit: 151, offset: 1 })
+    response = HTTParty.get('https://tyradex.vercel.app/api/v1/pokemon', query: { limit: 152, offset: 1 })
     @pokemons = JSON.parse(response.body).reject { |pokemon| pokemon['pokedex_id'].zero? }
+  rescue StandardError => e
+    Rails.logger.error "Failed to fetch pokemons: #{e.message}"
+    @pokemons = []
   end
 end

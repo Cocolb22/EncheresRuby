@@ -46,18 +46,23 @@
               <td><%=@article.bids.any? ? @highest_bid : @article.first_price %></td>
             </tr>
           </tbody>
+          <%= DateTime.now %>
+          <br>
+          <%= @article.start_date %>
+          <br>
+          <%= @article.end_date %>
         </table>
       </div>
     </div>
   </div>
   <div class="container col-md-8 mt-4 pb-3 d-flex justify-content-center">
-    <% if @article.start_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') && DateTime.now.strftime('%d/%m/%Y %H:%M') < @article.end_date.strftime('%d/%m/%Y %H:%M') %>
-          <%= simple_form_for [@article, @bid] do |f| %>
-            <%= f.input :bid_price, label: t("bid.amount") %>
-            <div class="d-flex justify-content-center rounded red">
-              <%= f.button :submit, value: t("bid.create_bid") %>
-            </div>
-          <% end %>
+    <% if @article.status == 'En cours' %>
+      <%= simple_form_for [@article, @bid] do |f| %>
+        <%= f.input :bid_price, label: t("bid.amount") %>
+        <div class="d-flex justify-content-center rounded red">
+          <%= f.button :submit, value: t("bid.create_bid") %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 
@@ -65,10 +70,10 @@
     <ul class="d-flex justify-content-center">
       <% if user_signed_in? %>
         <% if current_user.id == @article_user&.id %>
-          <% if @article.start_date.strftime('%d/%m/%Y %H:%M') > DateTime.now.strftime('%d/%m/%Y %H:%M') %>
+          <% if @article.status == 'Créée' %>
             <li class="nav-item m-2">
-            <%= form_with(model: @article, method: :delete, url: article_path(@article), data: { turbo_confirm: "Are you sure?" }) do |form| %>
-              <%= form.button t("globals.show_page.delete"), class: "delete-button text-center", type: :submit%>
+              <%= form_with(model: @article, method: :delete, url: article_path(@article), data: { turbo_confirm: t('globals.show_page.delete_confirm') }) do |form| %>
+                <%= form.button t("globals.show_page.delete"), class: "delete-button text-center", type: :submit %>
               <% end %>
             </li>
             <li class="nav-item m-2 d-flex justify-content-center text-center">
@@ -77,49 +82,49 @@
           <% end %>
         <% end %>
       <% end %>
-      </li>
     </ul>
   </div>
 
   <div class="container">
-    <% if @article.start_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') && DateTime.now.strftime('%d/%m/%Y %H:%M') < @article.end_date.strftime('%d/%m/%Y %H:%M') %>
-      <table class=" table table-striped">
-          <thead>
-            <tr>
+    <% if @article.status == 'En cours' %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
             <div class="row d-flex text-justify-center">
               <th scope="col" class="col-4">Pseudo</th>
               <th scope="col" class="col-4"><%= t('globals.article_form.actual_amount') %></th>
               <th scope="col" class="col-4">Date</th>
             </div>
+          </tr>
+        </thead>
+        <tbody>
+          <% @bids.each do |bid| %>
+            <tr>
+              <td><%= bid.user.first_name %></td>
+              <td><%= bid.bid_price %></td>
+              <td><%= bid.created_at.strftime('%d/%m/%Y %H:%M') %></td>
             </tr>
-          </thead>
-          <tbody>
-            <% @bids.each do |bid| %>
-                <tr>
-                  <td><%= bid.user.first_name %></td>
-                  <td><%= bid.bid_price %></td>
-                  <td><%= bid.created_at.strftime('%d/%m/%Y %H:%M') %>
-                </tr>
-            <% end %>
-          </tbody>
+          <% end %>
+        </tbody>
       </table>
-    <% end  %>
+    <% end %>
+
     <div class="d-flex align-items-center flex-column">
-      <% if @article.start_date.strftime('%d/%m/%Y %H:%M') > DateTime.now.strftime('%d/%m/%Y %H:%M') %>
-        <p><%= t('globals.table.not_start')%></p>
-      <% elsif @article.end_date.strftime('%d/%m/%Y %H:%M') < DateTime.now.strftime('%d/%m/%Y %H:%M') %>
-        <p><%= t('globals.table.ended')%></p>
+      <% if @article.status == 'Créée' %>
+        <p><%= t('globals.table.not_start') %></p>
+      <% elsif @article.status == 'Fermée' %>
+        <p><%= t('globals.table.ended') %></p>
         <% if @winner.is_a?(User) %>
-          <p><%= t('globals.table.winner')%> : <%= @winner.pseudo %></p>
+          <p><%= t('globals.table.winner') %> : <%= @winner.pseudo %></p>
         <% else %>
-          <p><%= t('globals.table.winner')%> : <%= @winner %></p>
+          <p><%= t('globals.table.winner') %> : <%= @winner %></p>
         <% end %>
       <% end %>
     </div>
     <% if @winner.is_a?(User) && @winner.id == current_user.id %>
       <div class="d-flex justify-content-center">
         <div class="rounded red p-2 m-2 w-50 text-center">
-            <%= link_to t("article.withdraw_link"), withdraw_article_path(@article), class: "text-dark" %>
+          <%= link_to t("article.withdraw_link"), withdraw_article_path(@article), class: "text-dark" %>
         </div>
       </div>
     <% end %>
