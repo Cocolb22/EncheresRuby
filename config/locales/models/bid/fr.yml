@@ -8,3 +8,5 @@ fr:
     already_leading: "Vous êtes déjà le meilleur enchérisseur"
     cant_be_first_bidder: "Vous ne pouvez pas être le premier enchérisseur de votre article"
     create_bid: "Enchérir"
+    cant_be_lower_than_highest_price : "Votre enchère ne peut être inférieure à la plus haute enchère en cours"
+    price_required: "Le montant ne peut être nul"
