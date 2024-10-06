@@ -8,3 +8,5 @@ en:
     already_leading: "You are already the leading bidder"
     cant_be_first_bidder: "You can't be the first bidder of your own article"
     create_bid: "Bid"
+    cant_be_lower_than_highest_price : "Your bid can't be lower than the leading bid"
+    price_required: "The amount can't be zero"

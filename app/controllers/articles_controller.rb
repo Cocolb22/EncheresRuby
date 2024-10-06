@@ -107,7 +107,7 @@ class ArticlesController < ApplicationController
   end
 
   def fetch_pokemons
-    @pokemons = PokemonHelper.fetch_all_pokemons
+    @pokemons = PokemonsHelper.fetch_all_pokemons
     @pokemons_names = @pokemons.map { |pokemon| pokemon['name']['fr'] }
     @first_gen_pokemons_names = @pokemons_names[1..151]
     @first_gen_pokemons = @pokemons.select { |pokemon| pokemon['generation'] == 1 }
@@ -121,7 +121,7 @@ class ArticlesController < ApplicationController
   end
 
   def attach_pokemon_image(article)
-    pokemon_image_url = PokemonHelper.fetch_pokemon_image(article.name)
+    pokemon_image_url = PokemonsHelper.fetch_pokemon_image(article.name)
 
     if pokemon_image_url
       image = URI.open(pokemon_image_url)

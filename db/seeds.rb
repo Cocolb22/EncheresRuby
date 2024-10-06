@@ -3,8 +3,16 @@
 require 'open-uri'
 require 'httparty'
 
+User.destroy_all
+
+User.create!(id: 1, email: 'coco@test.com', password: 'password', first_name: 'Coco', last_name: 'LB', pseudo: 'Coco',
+  credit: 1000, role: 'admin')
+
+User.create!(id: 2, email: 'erle@test.com', password: 'password1', first_name: 'Erle', last_name: 'LB', pseudo: 'Erle',
+  credit: 2000)
+
 # Helper pour récupérer les images des Pokémon
-module PokemonHelper
+module PokemonsHelper
   def self.fetch_all_pokemons
     response = HTTParty.get('https://tyradex.vercel.app/api/v1/pokemon', query: { limit: 151, offset: 1 })
     JSON.parse(response.body).reject { |pokemon| pokemon['pokedex_id'].zero? }
@@ -24,7 +32,7 @@ Article.destroy_all
 pokemon_names = %w[
   Pikachu Dracaufeu Carapuce Bulbizarre Salamèche
   Rattata Evoli Ronflex Mewtwo Dracolosse
-  Lokhlass Onix Magicarpe Alakazam Nidoking Gengar
+  Lokhlass Onix Magicarpe Alakazam Nidoking Ectoplasma
 ]
 
 pokemon_names.each do |pokemon_name|
@@ -40,7 +48,7 @@ pokemon_names.each do |pokemon_name|
   )
 
   # Associer l'image du Pokémon à l'article
-  pokemon_image_url = PokemonHelper.fetch_pokemon_image(pokemon_name)
+  pokemon_image_url = PokemonsHelper.fetch_pokemon_image(pokemon_name)
   if pokemon_image_url
     begin
       image = URI.open(pokemon_image_url)
