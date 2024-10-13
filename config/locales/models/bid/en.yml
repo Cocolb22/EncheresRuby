@@ -10,3 +10,5 @@ en:
     create_bid: "Bid"
     cant_be_lower_than_highest_price : "Your bid can't be lower than the leading bid"
     price_required: "The amount can't be zero"
+    creator_cant_bid: "Creator can't bid on his own article"
+

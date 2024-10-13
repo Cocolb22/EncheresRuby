@@ -13,6 +13,12 @@ class BidsController < ApplicationController
     return
   end
 
+  if @article.user_id = @bid.user.id
+    flash[:danger] = t('bid.creator_cant_bid')
+    redirect_to article_path(@article)
+    return
+  end
+
   ActiveRecord::Base.transaction do
     if @bid.user.credit < @bid.bid_price
       flash[:danger] = t('bid.not_enough')
