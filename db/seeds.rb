@@ -31,7 +31,7 @@ Article.destroy_all
 # Créer des articles avec images des Pokémon
 pokemon_names = %w[
   Pikachu Dracaufeu Carapuce Bulbizarre Salamèche
-  Rattata Evoli Ronflex Mewtwo Dracolosse
+  Rattata Feunard Ronflex Mewtwo Dracolosse
   Lokhlass Onix Magicarpe Alakazam Nidoking Ectoplasma
 ]
 
