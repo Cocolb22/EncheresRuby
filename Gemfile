@@ -18,7 +18,7 @@ gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 5.6.5'
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem 'importmap-rails'
+gem "importmap-rails", "~> 1.2.3"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem 'turbo-rails'
@@ -40,6 +40,7 @@ gem 'font-awesome-sass', '~> 6.1'
 
 # Simple Form
 gem 'simple_form'
+gem 'country_select'
 
 # Autoprefixer
 gem 'autoprefixer-rails'
@@ -60,6 +61,15 @@ gem 'pry-rails'
 
 # Kaminari
 gem 'kaminari'
+
+# geocoder
+gem 'geocoder'
+
+# dotenv
+gem 'dotenv-rails'
+
+gem "mapkick-rb"
+
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
