@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <div class="row">
+    <!-- Colonne gauche : Formulaire -->
+    <div class="col-md-4 shadow-box border p-3 rounded">
+      <h1>Créer un nouveau lieu</h1>
+      <%= simple_form_for @place, html: { class: 'form' } do |form| %>
+        <div class="form-input">
+          <%= form.input :name, label: "Nom du lieu", required: true %>
+        </div>
+        <div class="form-input">
+          <%= form.input :street, label: "Rue", required: true %>
+        </div>
+        <div class="form-input">
+          <%= form.input :postal_code, label: "Code postal", required: true %>
+        </div>
+        <div class="form-input">
+          <%= form.input :city, label: "Ville", required: true %>
+        </div>
+        <div class="form-input">
+          <%= form.input :country, label: "Pays", required: true %>
+        </div>
+        <div class="form-input">
+          <%= form.input :place_type, label: "Type de lieu", collection: Place::CATEGORIES, required: true %>
+        </div>
+        <div class="d-flex justify-content-center rounded red">
+          <%= form.button :submit, "Créer le lieu", class: "btn" %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Colonne droite : Carte -->
+    <div class="col-md-8">
+      <div data-controller="geocoder"
+        data-geocoder-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>">
+        <div id="map-geocoder" style="width: 100%; height: 500px;"></div>
+      </div>
+    </div>
+  </div>
+</div>

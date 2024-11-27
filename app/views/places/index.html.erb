@@ -1,0 +1,48 @@
+<body>
+
+  <div class="container">
+    <div class="sidebar">
+      <h2>Liste des lieux</h2>
+      <div class="d-flex justify-content-center p-3">
+      <%= link_to "Créer un lieu", new_place_path, class: 'btn rounded red' %>
+      </div>
+      <ul>
+        <% @places.each do |place| %>
+          <li class="places-list">
+            <%= "#{place.name} - #{place.city}" %>
+            <%= place.place_type %>
+            <input type="hidden" class="place-lat" value="<%= place.latitude %>">
+            <input type="hidden" class="place-lng" value="<%= place.longitude %>">
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="map-container">
+      <div style="width: 100%; height: 600px;"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_ACCESS_TOKEN'] %>"></div>
+    </div>
+  </div>
+</body>
+
+ <style>
+    .container {
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 33.33%;
+      padding: 20px;
+      background-color: #f4f4f4;
+      overflow-y: auto;
+    }
+    .map-container {
+      width: 66.67%;
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
